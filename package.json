@@ -1,0 +1,22 @@
+{
+  "name": "hburguer",
+  "version": "1.0.0",
+  "scripts": {
+    "sass": "sass --watch src/assets/sass/main.scss:src/assets/css/main.css",
+    "dev": "npm run sass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hcode-courses/lab-hburguer.git"
+  },
+  "keywords": [],
+  "author": "Hcode Lab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hcode-courses/lab-hburguer/issues"
+  },
+  "homepage": "https://github.com/hcode-courses/lab-hburguer#readme",
+  "dependencies": {
+    "sass": "^1.47.0"
+  }
+}
