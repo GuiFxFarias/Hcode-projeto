@@ -1,3 +1,2 @@
-
-alert("Helllloo  uord!")
+import "./bandeja.ts"
 
