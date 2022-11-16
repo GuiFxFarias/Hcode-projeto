@@ -14,6 +14,7 @@ if(page) {
             name: string;
             price: string;
         }
+       
 
     const opcoesEl = page.querySelectorAll(".category")
     const tiposPaesEl = opcoesEl[0] as HTMLElement
@@ -31,6 +32,9 @@ if(page) {
             name: "",
             price: ""
         }
+
+        console.log(item)
+
         item.name = tiposPaesh3El[i].innerText
         item.price = tiposPaesPriceEl[i].innerText
 
@@ -56,6 +60,10 @@ if(page) {
 
     }
     console.log(tiposIngredientes)
+
+
+    
+// Fazendo a bandeja pelo typescript
 
 
 // types
@@ -113,6 +121,7 @@ const atualizaBandeja = () => {
     }
     
 }
+
 
 
 const render = () => {
