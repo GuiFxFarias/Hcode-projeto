@@ -1,137 +1,181 @@
+const page = document.querySelector("body[data-display='bandeja']");
 
-const page = document.querySelector("body[data-display='bandeja']")
+if (page) {
+  // Mock de listagem de ingredientes (deve ser puxado do firebase)
 
-if(page) {
-    
-    // Mock de listagem de ingredientes (deve ser puxado do firebase)
-
-        // types
-        type tiposPaesItem = {
-            name: string;
-            price: string;
-        }
-        type tiposIngredientesItem = {
-            name: string;
-            price: string;
-        }
-       
-
-    const opcoesEl = page.querySelectorAll(".category")
-    const tiposPaesEl = opcoesEl[0] as HTMLElement
-    const tiposIngredientesEl = opcoesEl[1] as HTMLElement
-
-    const tiposPaes: tiposPaesItem[] = []
-    const tiposIngredientes: tiposIngredientesItem[] = []
-
-    // tiposPaes
-    const tiposPaesh3El = tiposPaesEl.querySelectorAll("h3")
-    const tiposPaesPriceEl = tiposPaesEl.querySelectorAll("div")
-    for(let i = 0; i < tiposPaesh3El.length; i++) {
-        
-        let item: tiposPaesItem = {
-            name: "",
-            price: ""
-        }
-
-        console.log(item)
-
-        item.name = tiposPaesh3El[i].innerText
-        item.price = tiposPaesPriceEl[i].innerText
-
-        tiposPaes.push(item)
-
-    }
-
-    console.log(tiposPaes)
-
-    //tiposIngredientes
-    const tiposIngredientesh3El = tiposIngredientesEl.querySelectorAll("h3")
-    const tiposIngredientesPriceEl = tiposIngredientesEl.querySelectorAll("div")
-    for(let i = 0; i < tiposIngredientesh3El.length; i++) {
-        
-        let item: tiposIngredientesItem = {
-            name: "",
-            price: ""
-        }
-        item.name = tiposIngredientesh3El[i].innerText
-        item.price = tiposIngredientesPriceEl[i].innerText
-
-        tiposIngredientes.push(item)
-
-    }
-    console.log(tiposIngredientes)
-
-
-    
-// Fazendo a bandeja pelo typescript
-
-
-// types
-
-type hamburguer = {
+  // types
+  type tiposPaesItem = {
     name: string;
     price: string;
-}
+  };
+  type tiposIngredientesItem = {
+    name: string;
+    price: string;
+  };
 
+  const opcoesEl = page.querySelectorAll(".category");
+  const tiposPaesEl = opcoesEl[0] as HTMLElement;
+  const tiposIngredientesEl = opcoesEl[1] as HTMLElement;
 
-// Carregar os hamburgueres selecionados no resumo
+  const tiposPaes: tiposPaesItem[] = [];
+  const tiposIngredientes: tiposIngredientesItem[] = [];
 
-const bandejaEl = page.querySelector("aside ul") as HTMLUListElement
-const bandejaTitulo = page.querySelector("header small") as HTMLElement
-let hamburgueres: hamburguer[] = []
+  // tiposPaes
+  const tiposPaesh3El = tiposPaesEl.querySelectorAll("h3");
+  const tiposPaesPriceEl = tiposPaesEl.querySelectorAll("div");
+  const paesTittle = document.querySelector(".paes") as HTMLDivElement;
 
-const limpaBandeja = () => {
-    bandejaEl.innerHTML = ""
-}
+  /*
+  for (let i = 0; i < tiposPaesh3El.length; i++) {
+    let item: tiposPaesItem = {
+      name: "",
+      price: "",
+    };
 
+    item.name = tiposPaesh3El[i].innerText;
+    item.price = tiposPaesPriceEl[i].innerText;
 
-const atualizaHamburgueres = () => {
+    tiposPaes.push(item);
+  }
+  */
 
-    hamburgueres = []
-    const hamburgueresEls = page.querySelectorAll("aside ul li")
-    hamburgueresEls?.forEach( hamburguerEl => {
+  // Criando os li pelo 'banco de dados' criado
+  const paesTipo: tiposPaesItem[] = [
+    {
+      name: "Pão Tradicional",
+      price: "2,00",
+    },
+    {
+      name: "Pão Australiano",
+      price: "3,00",
+    },
+    {
+      name: "Pão de Batata",
+      price: "2,50",
+    },
+  ];
 
-        const hamburguerElData = hamburguerEl.querySelectorAll("div")
-        
-        
-        let hamburguer = {
-            name: hamburguerElData[0].innerHTML,
-            price: hamburguerElData[1].innerHTML
-        }
-        
-        hamburgueres.push(hamburguer)
+  // console.log(paesTipo);
 
-        // console.log("Hamburgueres: ", hamburgueres)
+  paesTipo.forEach((item) => {
+    const ul = document.createElement("ul");
+
+    ul.innerHTML = `
+       <label>
+            <input type="radio" name="item" checked />
+            <span></span>
+            <h3>${item.name}</h3>
+            <div>R$ ${item.price}</div>
+        </label>
+        `;
+    paesTittle.appendChild(ul);
+  });
+
+  //tiposIngredientes
+  const tiposIngredientesh3El = tiposIngredientesEl.querySelectorAll("h3");
+  const tiposIngredientesPriceEl = tiposIngredientesEl.querySelectorAll("div");
+  const classIngredientes = document.querySelector(
+    ".ingredientes"
+  ) as HTMLDivElement;
+
+  // Adicionando ingredientes pelo 'banco de dados'
+
+  const divIngredientes: tiposIngredientesItem[] = [
+    {
+      name: "Carne Bovina 125g",
+      price: "3,00",
+    },
+    {
+      name: "Carne de Frango 125g",
+      price: "2,50",
+    },
+    {
+      name: "Carne de Peixe 125g",
+      price: "2,00",
+    },
+  ];
+
+  divIngredientes.forEach((item) => {
+    const ul = document.createElement("ul");
+
+    ul.innerHTML = `
+        <label>
+            <input type="checkbox" name="item" />
+            <span></span>
+            <h3>${item.name}</h3>
+            <div>R$ ${item.price}</div>
+        </label>
+        `;
+    classIngredientes.appendChild(ul);
+  });
+
+  /*
+  for (let i = 0; i < tiposIngredientesh3El.length; i++) {
+    let item: tiposIngredientesItem = {
+      name: "",
+      price: "",
+    };
+
+    item.name = tiposIngredientesh3El[i].innerText;
+    item.price = tiposIngredientesPriceEl[i].innerText;
+
+    tiposIngredientes.push(item);
+  }
+*/
+
+  // types
+
+  type hamburguer = {
+    name: string;
+    price: string;
+  };
+
+  // Carregar os hamburgueres selecionados no resumo
+
+  const bandejaEl = page.querySelector("aside ul") as HTMLUListElement;
+  const bandejaTitulo = page.querySelector("header small") as HTMLElement;
+  let hamburgueres: hamburguer[] = [];
+
+  const limpaBandeja = () => {
+    bandejaEl.innerHTML = "";
+  };
+
+  const atualizaHamburgueres = () => {
+    hamburgueres = [];
+    const hamburgueresEls = page.querySelectorAll("aside ul li");
+    hamburgueresEls?.forEach((hamburguerEl) => {
+      const hamburguerElData = hamburguerEl.querySelectorAll("div");
+
+      let hamburguer = {
+        name: hamburguerElData[0].innerHTML,
+        price: hamburguerElData[1].innerHTML,
+      };
+
+      hamburgueres.push(hamburguer);
+
+      // console.log("Hamburgueres: ", hamburgueres)
     });
-}
+  };
 
-
-const atualizaBandeja = () => {
-
+  const atualizaBandeja = () => {
     switch (hamburgueres.length) {
-        case 0:
-            bandejaTitulo.innerText = ""
-            break;
-        case 1:
-            bandejaTitulo.innerText = `${hamburgueres.length} Hamburguer`
-            break;
-        default:
-            bandejaTitulo.innerText = `${hamburgueres.length} Hamburgueres`
-            break;
+      case 0:
+        bandejaTitulo.innerText = "";
+        break;
+      case 1:
+        bandejaTitulo.innerText = `${hamburgueres.length} Hamburguer`;
+        break;
+      default:
+        bandejaTitulo.innerText = `${hamburgueres.length} Hamburgueres`;
+        break;
     }
-    
-}
+  };
 
+  const render = () => {
+    limpaBandeja();
+    atualizaHamburgueres();
+    atualizaBandeja();
+  };
 
-
-const render = () => {
-    limpaBandeja()
-    atualizaHamburgueres()
-    atualizaBandeja()
-}
-
-render()
-      
-
-    
+  render();
 }
