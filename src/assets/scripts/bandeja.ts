@@ -5,12 +5,12 @@ if (page) {
 
   // types
   type tiposPaesItem = {
-    name: string;
-    price: string;
+    nameP: string;
+    priceP: string;
   };
   type tiposIngredientesItem = {
-    name: string;
-    price: string;
+    nameI: string;
+    priceI: string;
   };
 
   const opcoesEl = page.querySelectorAll(".category");
@@ -42,16 +42,16 @@ if (page) {
   // Criando os li pelo 'banco de dados' criado
   const paesTipo: tiposPaesItem[] = [
     {
-      name: "Pão Tradicional",
-      price: "2,00",
+      nameP: "Pão Tradicional",
+      priceP: "2,00",
     },
     {
-      name: "Pão Australiano",
-      price: "3,00",
+      nameP: "Pão Australiano",
+      priceP: "3,00",
     },
     {
-      name: "Pão de Batata",
-      price: "2,50",
+      nameP: "Pão de Batata",
+      priceP: "2,50",
     },
   ];
 
@@ -64,8 +64,8 @@ if (page) {
        <label>
             <input type="radio" name="item" checked />
             <span></span>
-            <h3>${item.name}</h3>
-            <div>R$ ${item.price}</div>
+            <h3>${item.nameP}</h3>
+            <div>R$ ${item.priceP}</div>
         </label>
         `;
     paesTittle.appendChild(ul);
@@ -82,16 +82,16 @@ if (page) {
 
   const divIngredientes: tiposIngredientesItem[] = [
     {
-      name: "Carne Bovina 125g",
-      price: "3,00",
+      nameI: "Carne Bovina 125g",
+      priceI: "3,00",
     },
     {
-      name: "Carne de Frango 125g",
-      price: "2,50",
+      nameI: "Carne de Frango 125g",
+      priceI: "2,50",
     },
     {
-      name: "Carne de Peixe 125g",
-      price: "2,00",
+      nameI: "Carne de Peixe 125g",
+      priceI: "2,00",
     },
   ];
 
@@ -102,12 +102,45 @@ if (page) {
         <label>
             <input type="checkbox" name="item" />
             <span></span>
-            <h3>${item.name}</h3>
-            <div>R$ ${item.price}</div>
+            <h3>${item.nameI}</h3>
+            <div>R$ ${item.priceI}</div>
         </label>
         `;
     classIngredientes.appendChild(ul);
   });
+
+  const itensBandeja = document.querySelector(
+    ".bandeja-itens ul"
+  ) as HTMLUListElement;
+  const bandeja = document.querySelector(".bandeja-itens") as HTMLElement;
+
+  bandeja.innerHTML = "";
+
+  const selectedServices = [];
+
+  selectedServices.forEach((item) =>{
+
+
+
+    /*
+
+    const ul = document.createElement('ul')
+
+    ul.innerHTML = `
+    <li>
+       <div>Hamburguer 1</div>
+        <div>R$ 15,00</div>
+        <button type="button" aria-label="Remover Hamburguer 1">
+          <svg width="24" height="24" viewBox="0 0 fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 19C6 20.1 6.9 21 8 21H16C1720.1 18 19V7H6V19ZM19 4H15.5L14.5 34H5V6H19V4Z" fill="black"/>
+          </svg>
+        </button>
+    </li> 
+    `
+    bandeja.appendChild(ul)
+    */
+
+  })
 
   /*
   for (let i = 0; i < tiposIngredientesh3El.length; i++) {
