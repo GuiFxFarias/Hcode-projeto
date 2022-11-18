@@ -29,6 +29,7 @@ if (page) {
   const bandeja = document.querySelector(".bandeja-itens") as HTMLElement;
 
   let selectedServices: number[] = [];
+  let selectedPaes: number[] = [];
 
   // Criando o botao salva hambuguer
 
@@ -43,24 +44,39 @@ if (page) {
 
     itensBandeja.innerHTML = "";
 
-    selectedServices.forEach((idI) => {
-      console.log(idI);
+    // Pães
+
+    selectedPaes.forEach((id) =>{
+
+      const selectedIngPaes = paesTipo.find((item) =>{
+        return item.idP === id
+      })
+    })
+    
+    console.log(selectedPaes)
+    selectedPaes = []
+
+    // Ingredientes
+
+    selectedServices.forEach((id) => {
+      console.log(selectedServices);
 
       const selectedIngredientes = divIngredientes.find((item) => {
-        return item.idI === idI;
+        return item.idI === id;
       });
 
-      const li = document.createElement("li");
-      li.innerHTML = `
-          <div>${selectedIngredientes?.nameI}</div>
-            <div>${selectedIngredientes?.priceI}</div>
-        `;
+    });    
 
-      itensBandeja.appendChild(li);
-    });
+    
+
+    paesTipo.forEach((item,index) =>{
+      console.log(item)
+  })
+
   });
 
-  const renderBurger = () => {};
+  
+
 
   /*
   for (let i = 0; i < tiposPaesh3El.length; i++) {
@@ -109,6 +125,21 @@ if (page) {
         </label>
         `;
     paesTittle.appendChild(ul);
+
+    const input = ul.querySelector("input");
+
+    input?.addEventListener("click", (e) => {
+      const element = e.target as HTMLInputElement;
+
+      if (element.value) {
+        selectedPaes.push(Number(element.value));
+      } else {
+        element.value;
+        selectedPaes = selectedPaes.filter((id) => {
+          return id !== Number(element.value);
+        });
+      }
+    });
   });
 
   //tiposIngredientes
