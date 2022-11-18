@@ -52,9 +52,13 @@ if (page) {
   // Criando o botao salva hambuguer
 
   const saveBurger = document.querySelector("#save-burger");
+  const radioPaes = document.querySelector(".paes label span");
 
   saveBurger?.addEventListener("click", (e) => {
     e.preventDefault;
+
+     console.log(e)
+
     const itensBandeja = document.querySelector(
       ".bandeja-itens ul"
     ) as HTMLUListElement;
@@ -63,6 +67,8 @@ if (page) {
 
     // Pães
 
+    console.log(selectedPaes);
+
     selectedPaes.forEach((id) => {
       const selectedIngPaes = paesTipo.find((item) => {
         return item.idP === id;
@@ -70,7 +76,9 @@ if (page) {
     });
 
     // console.log(selectedPaes)
-    selectedPaes = [];
+    selectedPaes.pop();
+
+    console.log(selectedServices);
 
     // Ingredientes
 
@@ -113,7 +121,6 @@ if (page) {
 
     input?.addEventListener("click", (e) => {
       const element = e.target as HTMLInputElement;
-      console.log(element);
 
       if (element.value) {
         selectedPaes.push(Number(element.value));
