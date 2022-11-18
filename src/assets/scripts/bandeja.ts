@@ -57,8 +57,6 @@ if (page) {
   saveBurger?.addEventListener("click", (e) => {
     e.preventDefault;
 
-     console.log(e)
-
     const itensBandeja = document.querySelector(
       ".bandeja-itens ul"
     ) as HTMLUListElement;
