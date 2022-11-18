@@ -52,43 +52,28 @@ if (page) {
       });
     });
 
-<<<<<<< HEAD
-      const selectedIngPaes = paesTipo.find((item) =>{
-        return item.idP === id
-      })
-    })
-    
     // console.log(selectedPaes)
-    selectedPaes = []
-=======
+    selectedPaes = [];
     console.log(selectedPaes);
     selectedPaes = [];
->>>>>>> a512c0551160c57bfceef3a9a278687ae0bda9bc
 
     // Ingredientes
 
     selectedServices.forEach((id) => {
-    //  console.log(selectedServices);
+      //  console.log(selectedServices);
 
       const selectedIngredientes = divIngredientes.find((item) => {
         return item.idI === id;
       });
     });
 
-<<<<<<< HEAD
-    });    
+    paesTipo.forEach((item, index) => {
+      //  console.log(item)
+    });
 
-    
-
-    paesTipo.forEach((item,index) =>{
-    //  console.log(item)
-  })
-
-=======
     paesTipo.forEach((item, index) => {
       console.log(item);
     });
->>>>>>> a512c0551160c57bfceef3a9a278687ae0bda9bc
   });
 
   /*
@@ -143,7 +128,7 @@ if (page) {
 
     input?.addEventListener("click", (e) => {
       const element = e.target as HTMLInputElement;
-      console.log(element)
+      console.log(element);
 
       if (element.value) {
         selectedPaes.push(Number(element.value));
