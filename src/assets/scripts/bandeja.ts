@@ -27,35 +27,40 @@ if (page) {
   const tiposPaesPriceEl = tiposPaesEl.querySelectorAll("div");
   const paesTittle = document.querySelector(".paes") as HTMLDivElement;
   const bandeja = document.querySelector(".bandeja-itens") as HTMLElement;
-  
 
   let selectedServices: number[] = [];
 
-  const renderBurger = () => {
+  // Criando o botao salva hambuguer
+
+  const saveBurger = document.querySelector("#save-burger");
+
+  saveBurger?.addEventListener("click", (e) => {
+    e.preventDefault;
 
     const itensBandeja = document.querySelector(
       ".bandeja-itens ul"
     ) as HTMLUListElement;
 
-    itensBandeja.innerHTML = ''
+    itensBandeja.innerHTML = "";
 
     selectedServices.forEach((idI) => {
+      console.log(idI);
 
       const selectedIngredientes = divIngredientes.find((item) => {
-
         return item.idI === idI;
-
       });
 
       const li = document.createElement("li");
-
       li.innerHTML = `
-           <div>${selectedIngredientes?.nameI}</div>
+          <div>${selectedIngredientes?.nameI}</div>
             <div>${selectedIngredientes?.priceI}</div>
         `;
+
       itensBandeja.appendChild(li);
     });
-  };
+  });
+
+  const renderBurger = () => {};
 
   /*
   for (let i = 0; i < tiposPaesh3El.length; i++) {
@@ -159,10 +164,7 @@ if (page) {
           return id !== Number(element.value);
         });
       }
-
-      renderBurger();
     });
-    renderBurger();
   });
 
   /*
