@@ -53,13 +53,13 @@ if (page) {
       })
     })
     
-    console.log(selectedPaes)
+    // console.log(selectedPaes)
     selectedPaes = []
 
     // Ingredientes
 
     selectedServices.forEach((id) => {
-      console.log(selectedServices);
+    //  console.log(selectedServices);
 
       const selectedIngredientes = divIngredientes.find((item) => {
         return item.idI === id;
@@ -70,7 +70,7 @@ if (page) {
     
 
     paesTipo.forEach((item,index) =>{
-      console.log(item)
+    //  console.log(item)
   })
 
   });
@@ -130,6 +130,7 @@ if (page) {
 
     input?.addEventListener("click", (e) => {
       const element = e.target as HTMLInputElement;
+      console.log(element)
 
       if (element.value) {
         selectedPaes.push(Number(element.value));
