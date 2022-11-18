@@ -15,6 +15,24 @@ if (page) {
     priceI: string;
   };
 
+  const paesTipo: tiposPaesItem[] = [
+    {
+      idP: 1,
+      nameP: "Pão Tradicional",
+      priceP: "2,00",
+    },
+    {
+      idP: 2,
+      nameP: "Pão Australiano",
+      priceP: "3,00",
+    },
+    {
+      idP: 3,
+      nameP: "Pão de Batata",
+      priceP: "2,50",
+    },
+  ];
+
   const opcoesEl = page.querySelectorAll(".category");
   const tiposPaesEl = opcoesEl[0] as HTMLElement;
   const tiposIngredientesEl = opcoesEl[1] as HTMLElement;
@@ -37,7 +55,6 @@ if (page) {
 
   saveBurger?.addEventListener("click", (e) => {
     e.preventDefault;
-
     const itensBandeja = document.querySelector(
       ".bandeja-itens ul"
     ) as HTMLUListElement;
@@ -54,25 +71,13 @@ if (page) {
 
     // console.log(selectedPaes)
     selectedPaes = [];
-    console.log(selectedPaes);
-    selectedPaes = [];
 
     // Ingredientes
 
     selectedServices.forEach((id) => {
-      //  console.log(selectedServices);
-
       const selectedIngredientes = divIngredientes.find((item) => {
         return item.idI === id;
       });
-    });
-
-    paesTipo.forEach((item, index) => {
-      //  console.log(item)
-    });
-
-    paesTipo.forEach((item, index) => {
-      console.log(item);
     });
   });
 
@@ -89,26 +94,6 @@ if (page) {
     tiposPaes.push(item);
   }
   */
-
-  // Criando os li pelo 'banco de dados' criado
-  const paesTipo: tiposPaesItem[] = [
-    {
-      idP: 1,
-      nameP: "Pão Tradicional",
-      priceP: "2,00",
-    },
-    {
-      idP: 2,
-      nameP: "Pão Australiano",
-      priceP: "3,00",
-    },
-    {
-      idP: 3,
-      nameP: "Pão de Batata",
-      priceP: "2,50",
-    },
-  ];
-
   // console.log(paesTipo);
 
   paesTipo.forEach((item) => {
