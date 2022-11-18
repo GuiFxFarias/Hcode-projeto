@@ -46,8 +46,13 @@ if (page) {
 
     // Pães
 
-    selectedPaes.forEach((id) =>{
+    selectedPaes.forEach((id) => {
+      const selectedIngPaes = paesTipo.find((item) => {
+        return item.idP === id;
+      });
+    });
 
+<<<<<<< HEAD
       const selectedIngPaes = paesTipo.find((item) =>{
         return item.idP === id
       })
@@ -55,6 +60,10 @@ if (page) {
     
     // console.log(selectedPaes)
     selectedPaes = []
+=======
+    console.log(selectedPaes);
+    selectedPaes = [];
+>>>>>>> a512c0551160c57bfceef3a9a278687ae0bda9bc
 
     // Ingredientes
 
@@ -64,7 +73,9 @@ if (page) {
       const selectedIngredientes = divIngredientes.find((item) => {
         return item.idI === id;
       });
+    });
 
+<<<<<<< HEAD
     });    
 
     
@@ -73,10 +84,12 @@ if (page) {
     //  console.log(item)
   })
 
+=======
+    paesTipo.forEach((item, index) => {
+      console.log(item);
+    });
+>>>>>>> a512c0551160c57bfceef3a9a278687ae0bda9bc
   });
-
-  
-
 
   /*
   for (let i = 0; i < tiposPaesh3El.length; i++) {
