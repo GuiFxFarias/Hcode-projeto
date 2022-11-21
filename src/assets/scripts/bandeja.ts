@@ -265,7 +265,7 @@ if (page) {
   const total = document.querySelector(".price") as HTMLDivElement;
 
   total.innerHTML = `
-  <small>Subtotal</small>${}
+  <small>Subtotal</small>R$ 49,95
   `
 
   
