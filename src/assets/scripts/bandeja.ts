@@ -19,14 +19,14 @@ if (page) {
     id: number;
     name: string;
     prince: string;
-  }
+  };
 
   type hambuguerSave = {
     id: number;
     description: string;
     price: string;
     ingredientes: IngredienteHamburger;
-  }
+  };
 
   const paesTipo: tiposPaesItem[] = [
     {
@@ -45,8 +45,6 @@ if (page) {
       priceP: "2,50",
     },
   ];
-
-
 
   const opcoesEl = page.querySelectorAll(".category");
   const tiposPaesEl = opcoesEl[0] as HTMLElement;
@@ -80,18 +78,18 @@ if (page) {
 
     // Pães
 
+    const evento = e.target as HTMLInputElement;
 
     selectedPaes.forEach((id) => {
       let selectedIngPaes = paesTipo.find((item) => {
-        if(item.idP){
+        if (item.idP) {
           return item.idP === id;
         }
-
       });
       console.log(selectedIngPaes?.nameP)
     });
 
-    selectedPaes.pop();
+    selectedPaes = [];
 
     // Ingredientes
 
@@ -135,6 +133,8 @@ if (page) {
 
     input?.addEventListener("click", (e) => {
       const element = e.target as HTMLInputElement;
+
+      console.log(element.checked)
 
       if (element.value) {
         selectedPaes.push(Number(element.value));
