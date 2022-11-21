@@ -117,6 +117,7 @@ if (page) {
   // console.log(paesTipo);
 
   paesTipo.forEach((item) => {
+
     const ul = document.createElement("ul");
 
     ul.innerHTML = `
@@ -137,14 +138,14 @@ if (page) {
       console.log(element.checked)
 
       if (element.value) {
-        selectedPaes.push(Number(element.value));
-      } else {
-        element.value;
-        selectedPaes = selectedPaes.filter((id) => {
-          return id !== Number(element.value);
-        });
+        if(element.checked === true && selectedPaes.length < 1) {
+          selectedPaes.push(Number(element.value));
+        }
       }
+      
     });
+    
+    
   });
 
   //tiposIngredientes
