@@ -15,6 +15,19 @@ if (page) {
     priceI: string;
   };
 
+  type IngredienteHamburger = {
+    id: number;
+    name: string;
+    prince: string;
+  }
+
+  type hambuguerSave = {
+    id: number;
+    description: string;
+    price: string;
+    ingredientes: IngredienteHamburger;
+  }
+
   const paesTipo: tiposPaesItem[] = [
     {
       idP: 1,
@@ -32,6 +45,8 @@ if (page) {
       priceP: "2,50",
     },
   ];
+
+
 
   const opcoesEl = page.querySelectorAll(".category");
   const tiposPaesEl = opcoesEl[0] as HTMLElement;
@@ -65,18 +80,18 @@ if (page) {
 
     // Pães
 
-    console.log(selectedPaes);
 
     selectedPaes.forEach((id) => {
-      const selectedIngPaes = paesTipo.find((item) => {
-        return item.idP === id;
+      let selectedIngPaes = paesTipo.find((item) => {
+        if(item.idP){
+          return item.idP === id;
+        }
+
       });
+      console.log(selectedIngPaes?.nameP)
     });
 
-    // console.log(selectedPaes)
     selectedPaes.pop();
-
-    console.log(selectedServices);
 
     // Ingredientes
 
@@ -84,6 +99,7 @@ if (page) {
       const selectedIngredientes = divIngredientes.find((item) => {
         return item.idI === id;
       });
+      console.log(selectedIngredientes?.nameI)
     });
   });
 
