@@ -46,6 +46,24 @@ if (page) {
     },
   ];
 
+  const divIngredientes: tiposIngredientesItem[] = [
+    {
+      idI: 1,
+      nameI: "Carne Bovina 125g",
+      priceI: "3,00",
+    },
+    {
+      idI: 2,
+      nameI: "Carne de Frango 125g",
+      priceI: "2,50",
+    },
+    {
+      idI: 3,
+      nameI: "Carne de Peixe 125g",
+      priceI: "2,00",
+    },
+  ];
+
   const opcoesEl = page.querySelectorAll(".category");
   const tiposPaesEl = opcoesEl[0] as HTMLElement;
   const tiposIngredientesEl = opcoesEl[1] as HTMLElement;
@@ -86,7 +104,7 @@ if (page) {
           return item.idP === id;
         }
       });
-      console.log(selectedIngPaes?.nameP)
+      console.log(selectedIngPaes?.nameP);
     });
 
     selectedPaes = [];
@@ -97,7 +115,7 @@ if (page) {
       const selectedIngredientes = divIngredientes.find((item) => {
         return item.idI === id;
       });
-      console.log(selectedIngredientes?.nameI)
+      console.log(selectedIngredientes?.nameI);
     });
   });
 
@@ -117,7 +135,6 @@ if (page) {
   // console.log(paesTipo);
 
   paesTipo.forEach((item) => {
-
     const ul = document.createElement("ul");
 
     ul.innerHTML = `
@@ -132,20 +149,15 @@ if (page) {
 
     const input = ul.querySelector("input");
 
-    input?.addEventListener("click", (e) => {
+    input?.addEventListener("change", (e) => {
       const element = e.target as HTMLInputElement;
 
-      console.log(element.checked)
-
       if (element.value) {
-        if(element.checked === true && selectedPaes.length < 1) {
+        if (selectedPaes.length < 1) {
           selectedPaes.push(Number(element.value));
         }
       }
-      
     });
-    
-    
   });
 
   //tiposIngredientes
@@ -156,24 +168,6 @@ if (page) {
   ) as HTMLDivElement;
 
   // Adicionando ingredientes pelo 'banco de dados'
-
-  const divIngredientes: tiposIngredientesItem[] = [
-    {
-      idI: 1,
-      nameI: "Carne Bovina 125g",
-      priceI: "3,00",
-    },
-    {
-      idI: 2,
-      nameI: "Carne de Frango 125g",
-      priceI: "2,50",
-    },
-    {
-      idI: 3,
-      nameI: "Carne de Peixe 125g",
-      priceI: "2,00",
-    },
-  ];
 
   divIngredientes.forEach((item) => {
     const ul = document.createElement("ul");
@@ -265,6 +259,16 @@ if (page) {
         break;
     }
   };
+
+  // Fazendo o Total ficar com o preço funcional
+
+  const total = document.querySelector(".price") as HTMLDivElement;
+
+  total.innerHTML = `
+  <small>Subtotal</small>${}
+  `
+
+  
 
   const render = () => {
     limpaBandeja();
