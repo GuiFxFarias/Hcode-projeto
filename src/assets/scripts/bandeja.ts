@@ -18,6 +18,8 @@ let currentHamburguers = [] as Hamburguer[]
 const ingredientEls = page.querySelectorAll(".category label")
 let selectedIngredients = [] as Ingredient[]
 
+let pricesArray = [] as number[]
+
 
 
 // -------------------------------------------------------------------------------
@@ -71,14 +73,15 @@ const limpaBandeja = () => {
 }
 
 
-    // adicionar hamburguer
+
+
+// adicionar hamburguer
 
         // Atualizar Ingredientes selecionados
 const atualizaIngredientes = () => {
     // criar consts de Ingredientes selecionados, ids dos ingredientes selecionados
-  
     
-    let pricesArray = [] as number[]
+    pricesArray = []
 
     // limpa ingredientes
     selectedIngredients = []
@@ -115,14 +118,12 @@ const atualizaIngredientes = () => {
     })
 
 
-    hamburguerPrice = pricesArray.reduce((p, n) => {
-        return p+n
-    }, 0)
+    atualizaHamburguerEPreco()
 
-    atualizaHamburguer()
 
 
 }
+
 
 
 // Atualiza Hamburguer
@@ -154,7 +155,28 @@ const atualizaHamburguers = () => {
 
     currentHamburguers.forEach( hamburguer => {
         const li = document.createElement("li")
-        li.innerHTML = `<div>${hamburguer.description}</div>
+        if(hamburguer.description=="Novo Hamburguer") {
+
+        li.innerHTML = `<div style="color: white">${hamburguer.description}</div>
+
+        <div style="color: white">${formatCurrency(hamburguer.price)}</div>
+        <button type="button" aria-label="Remover Hamburguer 1">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
+            </svg>
+        </button>`
+        li.style.backgroundColor = "gray"
+        li.style.outlineStyle = "solid"
+        li.style.outlineWidth = "3px"
+        li.style.outlineColor = "gray"
+
+        // li.classList.add("highlight-gray") --- configurar classe no sass
+        hamburguersEl.appendChild(li)
+
+
+        } else {
+
+            li.innerHTML = `<div>${hamburguer.description}</div>
 
         <div>${formatCurrency(hamburguer.price)}</div>
         <button type="button" aria-label="Remover Hamburguer 1">
@@ -162,41 +184,56 @@ const atualizaHamburguers = () => {
                 <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
             </svg>
         </button>`
+
+        // li.classList.add("highlight-gray") --- configurar classe no sass
         hamburguersEl.appendChild(li)
+
+        }
+        
     })
 
 }
-
-
-/////////////////////////   TRABALHANDO AQUI !!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 // adicionar Hamburguer
 
 const adicionaHamburguer = () => {
 
-    const {price, description, ingredients} = currentHamburguer
+    if(currentHamburguer.price>0) {
+        const {price} = currentHamburguer
+        const description = `Hamburguer ${currentHamburguers.length}`
+        const currentIngredients = currentHamburguer.ingredients as Ingredient[]
+    
+        let createdHamburguer = { price, description, ingredients: [] as Ingredient[]}
+        createdHamburguer.ingredients = [...currentIngredients]
+    
+        // lógica de adição de novos componentes na pilha / bandeja
+        currentHamburguers.pop()
+        currentHamburguers.push(createdHamburguer)
+        currentHamburguers.push(currentHamburguer)
+        
+        currentHamburguers[currentHamburguers.length-1].description = `Novo Hamburguer`
+    
 
-    const createdHamburguer: Hamburguer = {
-        description: `Hamburguer ${currentHamburguers.length}`,
-        price,
-        ingredients
+        limpaIngredientesSelecionados()
+
+        onHamburgerChange()
+    
+        // criar novo hamburguer  na aside, e atualizar Hamburguers
+        // criar novo elemento para novo hamburguer na aside
+    } else {
+        alert("Hamburguer vazio! Favor adicionar algum ingrediente ao seu hambúrguer.")
     }
-
-    currentHamburguers.unshift(createdHamburguer)
-    
-    console.log("currentHamburguer: ", currentHamburguer)
-    console.log("currentHamburguers: ", currentHamburguers)
-    
-    currentHamburguers[currentHamburguers.length-1].description = `Novo Hamburguer`
-    // currentHamburguers.push(currentHamburguer)
-
-    console.log("currentHamburguer: ", currentHamburguer)
-    console.log("currentHamburguers: ", currentHamburguers)
-
-    // criar novo hamburguer  na aside, e atualizar Hamburguers
-    // criar novo elemento para novo hamburguer na aside
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -211,40 +248,101 @@ const atualizaBandeja = () => {
             bandejaTitulo.innerText = ""
             break;
         case 1:
-            bandejaTitulo.innerText = `${currentHamburguers.length} Hamburguer`
+            bandejaTitulo.innerText = `Montando Hamburguer...`
+            break;
+        case 2:
+            bandejaTitulo.innerText = `1 Hamburguer`
             break;
         default:
-            bandejaTitulo.innerText = `${currentHamburguers.length} Hamburgueres`
+            bandejaTitulo.innerText = `${currentHamburguers.length-1} Hamburgueres`
             break;
     }
 
-    // Atualiza preco total
-    let precoHamburguers = 0
-    currentHamburguers.forEach( hamburguer => {
-        precoHamburguers += hamburguer.price
-    })
 
-    precoTotalEl.innerHTML = `<small>Subtotal</small>${formatCurrency(precoHamburguers)}`
-
+    atualizaPrecoTotalEl()
 
 }
 
 
-const render = () => {
 
+const limpaIngredientesSelecionados = () => {
+    ingredientEls.forEach( ingredientEl => {
+        const input = ingredientEl.querySelector("input") as HTMLInputElement
+        input.checked = false
+      })
+}
+
+
+
+const atualizaPrecoHamburguer = () => {
+    hamburguerPrice = pricesArray.reduce((p, n) => {
+        return p+n
+    }, 0)
+}
+
+const atualizaPrecoTotalEl = () => {
+
+        let precoHamburguers = 0
+        currentHamburguers.forEach( hamburguer => {
+            precoHamburguers += hamburguer.price
+        })
+    
+        precoTotalEl.innerHTML = `<small>Subtotal</small>${formatCurrency(precoHamburguers)}`
+    
+}
+
+const atualizaHamburguerEPreco = () => {
+    atualizaPrecoHamburguer()
+    atualizaHamburguer()
+}
+
+
+const onHamburgerChange = () => {
     atualizaIngredientes()
-    limpaBandeja()
     atualizaHamburguer()
     atualizaHamburguers()
     atualizaBandeja()
+}
+
+
+
+
+
+const render = () => {
+
+    
+    limpaIngredientesSelecionados()
+    // limpa todos os input checked
+
+    atualizaIngredientes()
+    // atualiza selectedIngredients[] (que contém todos os ingredentes: Ingredient selecionados)
+    // e também pricesArray[] que contém todos os precos de ingredientes selecionados,
+    // e que será usado no cálculo do preco do hambúrguer pela funcao
+    // atualizaHamburguerEPreco() / atualizaPrecoHamburguer, que já é chamada 
+    // no fim do código de atualizaIngredient
+
+    limpaBandeja()
+    // garante que o aside inicie com apenas 1 elemento de hamburguer na bandeja
+
+    // atualizaPrecoHamburguer()
+    // Recalcula o preco do hamburguer, usando pricesArray
+
+
+    atualizaHamburguer()
+    // atualiza currentHamburguer, com base em hamburguerPrice, 
+    // selectedIngredients,   e description recebe 'Novo Hamburguer'
+
+    atualizaHamburguers()
+    // atualiza currentHmburguers e os elementos de hamburguers no aside
+
+    atualizaBandeja()
+    // atualiza título e prço total da bandeja
+
 
 
     ingredientEls.forEach( ingredientEl => {
         ingredientEl.addEventListener("change", () => {
-            atualizaIngredientes()
-            atualizaHamburguer()
-            atualizaHamburguers()
-            atualizaBandeja()
+            onHamburgerChange()
         })
     })
 
