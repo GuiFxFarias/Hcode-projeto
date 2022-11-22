@@ -120,9 +120,8 @@ const atualizaIngredientes = () => {
 
     atualizaHamburguer()
 
-    
-}
 
+}
 
 
 // Atualiza Hamburguer
