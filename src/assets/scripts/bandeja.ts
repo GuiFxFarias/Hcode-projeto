@@ -2,6 +2,7 @@ import { Hamburguer } from "./types/Hamburguer";
 import { Ingredient } from "./types/Ingredient";
 import { formatCurrency } from "./function/formatCurrency"
 
+
 const page = document.querySelector("body[data-display='bandeja']")
 
 if(page) {
