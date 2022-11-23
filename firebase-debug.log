@@ -1,0 +1,92 @@
+[debug] [2022-11-23T22:19:36.262Z] ----------------------------------------------------------------------
+[debug] [2022-11-23T22:19:36.264Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\guilh\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2022-11-23T22:19:36.265Z] CLI Version:   11.16.1
+[debug] [2022-11-23T22:19:36.265Z] Platform:      win32
+[debug] [2022-11-23T22:19:36.265Z] Node Version:  v16.17.0
+[debug] [2022-11-23T22:19:36.267Z] Time:          Wed Nov 23 2022 19:19:36 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2022-11-23T22:19:36.267Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-23T22:19:36.282Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-23T22:19:36.282Z] > authorizing via signed-in user (guilhermefarias210303@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\guilh\OneDrive\Área de Trabalho\Arquivos importantes\Projetos-copias\Hcode-pTestes
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2022-11-23T22:19:43.972Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2022-11-23T22:19:44.766Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2022-11-23T22:19:44.767Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project hburger-projeto (Hburger-projeto) 
+[info] 
+=== Firestore Setup
+[debug] [2022-11-23T22:19:46.093Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/hburger-projeto/services/firestore.googleapis.com [none]
+[debug] [2022-11-23T22:19:46.094Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/hburger-projeto/services/firestore.googleapis.com x-goog-quota-user=projects/hburger-projeto
+[debug] [2022-11-23T22:19:47.183Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/hburger-projeto/services/firestore.googleapis.com 200
+[debug] [2022-11-23T22:19:47.183Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/hburger-projeto/services/firestore.googleapis.com [omitted]
+[debug] [2022-11-23T22:19:47.183Z] >>> [apiv2][query] GET https://appengine.googleapis.com/v1/apps/hburger-projeto [none]
+[debug] [2022-11-23T22:19:47.680Z] <<< [apiv2][status] GET https://appengine.googleapis.com/v1/apps/hburger-projeto 200
+[debug] [2022-11-23T22:19:47.681Z] <<< [apiv2][body] GET https://appengine.googleapis.com/v1/apps/hburger-projeto {"name":"apps/hburger-projeto","id":"hburger-projeto","authDomain":"gmail.com","locationId":"us-central","codeBucket":"staging.hburger-projeto.appspot.com","servingStatus":"SERVING","defaultHostname":"hburger-projeto.uc.r.appspot.com","defaultBucket":"hburger-projeto.appspot.com","serviceAccount":"hburger-projeto@appspot.gserviceaccount.com","gcrDomain":"us.gcr.io","databaseType":"CLOUD_FIRESTORE","featureSettings":{"splitHealthChecks":true,"useContainerOptimizedOs":true}}
+[debug] [2022-11-23T22:19:47.681Z] database_type: CLOUD_FIRESTORE
+[debug] [2022-11-23T22:19:47.683Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-23T22:19:47.683Z] > authorizing via signed-in user (guilhermefarias210303@gmail.com)
+[debug] [2022-11-23T22:19:47.684Z] [iam] checking project hburger-projeto for permissions ["firebase.projects.get"]
+[debug] [2022-11-23T22:19:47.685Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/hburger-projeto:testIamPermissions [none]
+[debug] [2022-11-23T22:19:47.686Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/hburger-projeto:testIamPermissions x-goog-quota-user=projects/hburger-projeto
+[debug] [2022-11-23T22:19:47.686Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/hburger-projeto:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-11-23T22:19:48.651Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/hburger-projeto:testIamPermissions 200
+[debug] [2022-11-23T22:19:48.651Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/hburger-projeto:testIamPermissions {"permissions":["firebase.projects.get"]}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2022-11-23T22:20:33.059Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/hburger-projeto/releases pageSize=10&pageToken=
+[debug] [2022-11-23T22:20:34.171Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/hburger-projeto/releases 200
+[debug] [2022-11-23T22:20:34.171Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/hburger-projeto/releases {"releases":[{"name":"projects/hburger-projeto/releases/cloud.firestore","rulesetName":"projects/hburger-projeto/rulesets/c1fb1bcc-b7a1-46ff-a38b-e99e72b85667","createTime":"2022-11-23T22:07:28.158052Z","updateTime":"2022-11-23T22:07:28.158052Z"},{"name":"projects/hburger-projeto/releases/firebase.storage/hburger-projeto.appspot.com","rulesetName":"projects/hburger-projeto/rulesets/00435e78-2d3c-48ae-98ab-9b9b91fd61c5","createTime":"2022-11-23T22:19:09.687779Z","updateTime":"2022-11-23T22:19:09.687779Z"}]}
+[debug] [2022-11-23T22:20:34.172Z] Found ruleset: projects/hburger-projeto/rulesets/c1fb1bcc-b7a1-46ff-a38b-e99e72b85667
+[debug] [2022-11-23T22:20:34.173Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/hburger-projeto/rulesets/c1fb1bcc-b7a1-46ff-a38b-e99e72b85667 [none]
+[debug] [2022-11-23T22:20:35.148Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/hburger-projeto/rulesets/c1fb1bcc-b7a1-46ff-a38b-e99e72b85667 200
+[debug] [2022-11-23T22:20:35.149Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/hburger-projeto/rulesets/c1fb1bcc-b7a1-46ff-a38b-e99e72b85667 [omitted]
+[info] 
+[info] Firestore indexes allow you to perform complex queries while
+[info] maintaining performance that scales with the size of the result
+[info] set. You can keep index definitions in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2022-11-23T22:20:45.494Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/hburger-projeto/databases/(default)/collectionGroups/-/indexes [none]
+[debug] [2022-11-23T22:20:45.499Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/hburger-projeto/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false [none]
+[debug] [2022-11-23T22:20:46.542Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/hburger-projeto/databases/(default)/collectionGroups/-/indexes 200
+[debug] [2022-11-23T22:20:46.543Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/hburger-projeto/databases/(default)/collectionGroups/-/indexes {}
+[debug] [2022-11-23T22:20:47.229Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/hburger-projeto/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false 200
+[debug] [2022-11-23T22:20:47.229Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/hburger-projeto/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false {"fields":[{"name":"projects/hburger-projeto/databases/(default)/collectionGroups/__default__/fields/*","indexConfig":{"indexes":[{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"ASCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"DESCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","arrayConfig":"CONTAINS"}],"state":"READY"}]}}]}
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2022-11-23T22:24:12.978Z] Error: ENOENT: no such file or directory, mkdir 'C:\Users\guilh\OneDrive\Área de Trabalho\Arquivos importantes\Projetos-copias\Hcode-pTestes\																																																																																							'
+    at Object.mkdirSync (node:fs:1386:3)
+    at Object.module.exports.makeDirSync (C:\Users\guilh\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\fs-extra\lib\mkdirs\make-dir.js:23:13)
+    at Object.createFileSync (C:\Users\guilh\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\fs-extra\lib\ensure\file.js:59:45)
+    at Config.writeProjectFile (C:\Users\guilh\AppData\Roaming\npm\node_modules\firebase-tools\lib\config.js:152:12)
+    at C:\Users\guilh\AppData\Roaming\npm\node_modules\firebase-tools\lib\config.js:176:22
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async doSetup (C:\Users\guilh\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\features\hosting\index.js:129:13)
+    at async init (C:\Users\guilh\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:36:9)
+[error] 
+[error] Error: An unexpected error has occurred.
