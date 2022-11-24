@@ -6,7 +6,8 @@
   "scripts": {
     "sass": "sass --watch src/assets/sass/main.scss:src/assets/css/main.css",
     "dev-sass": "npm run sass",
-    "dev": "webpack serve"
+    "dev": "webpack serve",
+    "build": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
