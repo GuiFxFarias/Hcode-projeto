@@ -1,12 +1,14 @@
 import { Hamburguer } from "./types/Hamburguer";
 import { Ingredient } from "./types/Ingredient";
 import { formatCurrency } from "./function/formatCurrency"
+import { collection, getFirestore, onSnapshot } from "firebase/firestore";
 
 
 const page = document.querySelector("body[data-display='bandeja']")
 
 if(page) {
     
+const database = getFirestore()
 const bandejaEl = page.querySelector("aside ul") as HTMLUListElement
 const bandejaTitulo = page.querySelector("header small") as HTMLElement
 const precoTotalEl = page.querySelector("footer .price") as HTMLDivElement
@@ -29,6 +31,23 @@ let pricesArray = [] as number[]
     const opcoesEl = page.querySelectorAll(".category")
     const tiposPaesEl = opcoesEl[0] as HTMLElement
     const tiposIngredientesEl = opcoesEl[1] as HTMLElement
+
+    let ingredientList: Ingredient[] = []
+
+    onSnapshot(collection(database, 'Ingredientes'), (collection) => {
+
+        ingredientList = [];
+    
+        collection.forEach((doc) => {
+    
+            ingredientList.push(doc.data() as Ingredient);
+    
+        });
+    
+        // renderServices();
+        console.log(ingredientList)
+    
+    });
 
     const tiposPaes: Ingredient[] = []
     const tiposIngredientes: Ingredient[] = []
@@ -351,6 +370,12 @@ const render = () => {
     })
 }
 
+
+
+
+
 render()
+
+
     
 }
