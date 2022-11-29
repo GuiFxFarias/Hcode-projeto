@@ -27,6 +27,7 @@ if (page) {
   const tiposPaesEl = opcoesEl[0] as HTMLElement;
   const tiposIngredientesEl = opcoesEl[1] as HTMLElement;
 
+  // Lista de arrays onde serao salvas as informações do firebase
   let ingredientList: Ingredient[] = [];
   let paoList: Ingredient[] = [];
   let hamburguerList: Ingredient[] = [];
@@ -50,6 +51,7 @@ if (page) {
     tiposPaes.push(item);
   }
 
+  // Criando as constantes que serao criadas pelo firebase
   const opcoesPao = document.querySelector(".pao") as HTMLDivElement;
   const opcoesHamburguer = document.querySelector(
     ".hamburguer"
@@ -134,7 +136,8 @@ if (page) {
       });
 
       renderOptions();
-      console.log(ingredientList);
+      console.log(ingredientList)
+      
     });
 
     onSnapshot(collection(database, "Ingredientes"), (collection) => {
@@ -145,7 +148,7 @@ if (page) {
       });
 
       renderOptions();
-      console.log(paoList);
+      
     });
 
     onSnapshot(collection(database, "Hamburguer"), (collection) => {
@@ -156,7 +159,7 @@ if (page) {
       });
 
       renderOptions();
-      console.log(hamburguerList);
+     
     });
   };
 
@@ -181,6 +184,8 @@ if (page) {
     bandejaEl.innerHTML = "";
   };
 
+
+  
   // adicionar hamburguer
 
   // Atualizar Ingredientes selecionados
@@ -192,7 +197,8 @@ if (page) {
     // limpa ingredientes
     selectedIngredients = [];
 
-    ingredientEls.forEach((ingredient) => {
+    // ----------------------------------------------------------------- COLOCAR O FIREBASE AQUI -----------------------------------------------------------------
+    ingredientEls.forEach((ingredient) => {  
       if (ingredient.querySelector("input:checked")) {
         const ingredientName = ingredient.querySelector("h3")
           ?.innerHTML as string;
@@ -215,14 +221,16 @@ if (page) {
             "Erro: esse iongrediente não possuía descrição ou preço válido "
           );
         }
+        
       }
+      
     });
 
     atualizaHamburguerEPreco();
   };
 
   // Atualiza Hamburguer
-
+  // ----------------------------------------------------------------- COLOCAR O FIREBASE AQUI -----------------------------------------------------------------
   const atualizaHamburguer = () => {
     currentHamburguer = {
       description: "Novo Hamburguer",
@@ -335,6 +343,8 @@ if (page) {
     atualizaPrecoTotalEl();
   };
 
+
+  // ----------------------------------------------------------------- COLOCAR O FIREBASE AQUI -----------------------------------------------------------------
   const limpaIngredientesSelecionados = () => {
     ingredientEls.forEach((ingredientEl) => {
       const input = ingredientEl.querySelector("input") as HTMLInputElement;
@@ -404,6 +414,8 @@ if (page) {
     renderColections();
     // faz um 'OnSnapShot' nas coleções
 
+
+    // ----------------------------------------------------------------- COLOCAR O FIREBASE AQUI -----------------------------------------------------------------
     ingredientEls.forEach((ingredientEl) => {
       ingredientEl.addEventListener("change", () => {
         onHamburgerChange();
