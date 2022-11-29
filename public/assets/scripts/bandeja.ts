@@ -136,8 +136,7 @@ if (page) {
       });
 
       renderOptions();
-      console.log(ingredientList)
-      
+      console.log(ingredientList);
     });
 
     onSnapshot(collection(database, "Ingredientes"), (collection) => {
@@ -148,7 +147,6 @@ if (page) {
       });
 
       renderOptions();
-      
     });
 
     onSnapshot(collection(database, "Hamburguer"), (collection) => {
@@ -159,7 +157,6 @@ if (page) {
       });
 
       renderOptions();
-     
     });
   };
 
@@ -184,8 +181,6 @@ if (page) {
     bandejaEl.innerHTML = "";
   };
 
-
-  
   // adicionar hamburguer
 
   // Atualizar Ingredientes selecionados
@@ -198,7 +193,7 @@ if (page) {
     selectedIngredients = [];
 
     // ----------------------------------------------------------------- COLOCAR O FIREBASE AQUI -----------------------------------------------------------------
-    ingredientEls.forEach((ingredient) => {  
+    ingredientEls.forEach((ingredient) => {
       if (ingredient.querySelector("input:checked")) {
         const ingredientName = ingredient.querySelector("h3")
           ?.innerHTML as string;
@@ -221,9 +216,7 @@ if (page) {
             "Erro: esse iongrediente não possuía descrição ou preço válido "
           );
         }
-        
       }
-      
     });
 
     atualizaHamburguerEPreco();
@@ -343,7 +336,6 @@ if (page) {
     atualizaPrecoTotalEl();
   };
 
-
   // ----------------------------------------------------------------- COLOCAR O FIREBASE AQUI -----------------------------------------------------------------
   const limpaIngredientesSelecionados = () => {
     ingredientEls.forEach((ingredientEl) => {
@@ -413,7 +405,6 @@ if (page) {
 
     renderColections();
     // faz um 'OnSnapShot' nas coleções
-
 
     // ----------------------------------------------------------------- COLOCAR O FIREBASE AQUI -----------------------------------------------------------------
     ingredientEls.forEach((ingredientEl) => {
