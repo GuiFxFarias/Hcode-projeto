@@ -1,6 +1,6 @@
 import IMask from "imask";
 
-const page = document.querySelector("body");
+const page = document.querySelector("body[data-display='payment']");
 
 if (page) {
   const numCartao = page.querySelector("#cartao") as HTMLInputElement;
@@ -8,7 +8,7 @@ if (page) {
   const codCvv = page.querySelector("#cvv") as HTMLInputElement;
   const nome = page.querySelector("#nome") as HTMLInputElement;
 
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   IMask(numCartao, {
     mask: "0000 0000 0000 0000",
@@ -19,8 +19,8 @@ if (page) {
     blocks: {
       YY: {
         mask: IMask.MaskedRange,
-        from: String(year).substring(2,4),
-        to: String(year + 10).substring(2,4),
+        from: String(year).substring(2, 4),
+        to: String(year + 10).substring(2, 4),
       },
       MM: {
         mask: IMask.MaskedRange,

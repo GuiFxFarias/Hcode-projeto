@@ -2,6 +2,8 @@ import { Hamburguer } from "./types/Hamburguer";
 import { Ingredient } from "./types/Ingredient";
 import { formatCurrency } from "./function/formatCurrency";
 import { collection, doc, getFirestore, onSnapshot } from "firebase/firestore";
+import { criaItens } from "./function/criaItem";
+import { AnyObject } from "./types/anyObject";
 
 const page = document.querySelector("body[data-display='bandeja']");
 
@@ -14,7 +16,7 @@ if (page) {
   let currentHamburguer = {} as Hamburguer;
   let currentHamburguers = [] as Hamburguer[];
 
-  const ingredientEls = page.querySelectorAll(".category label");
+  let ingredientEls = page.querySelectorAll(".category label");
   let selectedIngredients = [] as Ingredient[];
 
   let pricesArray = [] as number[];
@@ -58,6 +60,15 @@ if (page) {
   ) as HTMLDivElement;
   const opcoesIngre = document.querySelector(".ingredientes") as HTMLDivElement;
 
+  let allIngredientsList = [] as AnyObject[];
+  let displayPaoEl = page.querySelector(".category.pao ul") as HTMLElement;
+  let displayHamburguerEl = page.querySelector(
+    ".category.hamburguer ul"
+  ) as HTMLElement;
+  let displayIngredientesEl = page.querySelector(
+    ".category.ingredientes ul"
+  ) as HTMLElement;
+
   const renderOptions = () => {
     if (opcoesPao) {
       opcoesPao.innerHTML =
@@ -72,13 +83,13 @@ if (page) {
         "<h2>Turbine seu hamburguer! Escolha os extras:</h2>";
     }
 
-    ingredientList.forEach((item) => {
+    paoList.forEach((item) => {
       const ul = document.createElement("ul");
 
       ul.innerHTML = `
-                <li>
+                  <li>
                     <label>
-                      <input type="radio" name="carne" checked />
+                      <input type="radio" name="pao" checked />
                       <span></span>
                       <h3>${item.name}</h3>
                       <div>R$ ${item.price}</div>
@@ -87,14 +98,19 @@ if (page) {
             `;
       const input = ul.querySelector("input") as HTMLInputElement;
 
+      input.addEventListener("change", () => {
+        onHamburgerChange();
+        console.log("change ok");
+      });
+
       opcoesPao.appendChild(ul);
     });
 
-    paoList.forEach((item) => {
+    hamburguerList.forEach((item) => {
       const ul = document.createElement("ul");
 
       ul.innerHTML = `
-                <li>
+                  <li>
                     <label>
                       <input type="radio" name="carne" checked />
                       <span></span>
@@ -108,13 +124,13 @@ if (page) {
       opcoesHamburguer.appendChild(ul);
     });
 
-    hamburguerList.forEach((item) => {
+    ingredientList.forEach((item) => {
       const ul = document.createElement("ul");
 
       ul.innerHTML = `
-                <li>
+                  <li>
                     <label>
-                      <input type="radio" name="carne" checked />
+                      <input type="radio" name="extra" checked />
                       <span></span>
                       <h3>${item.name}</h3>
                       <div>R$ ${item.price}</div>
@@ -125,40 +141,71 @@ if (page) {
 
       opcoesIngre.appendChild(ul);
     });
+
+    ingredientList = [...hamburguerList, ...paoList, ...ingredientList];
+
+    console.log(allIngredientsList);
+
+    displayPaoEl = page.querySelector(".category.pao ul") as HTMLElement;
+    displayHamburguerEl = page.querySelector(
+      ".category.hamburguer ul"
+    ) as HTMLElement;
+    displayIngredientesEl = page.querySelector(
+      ".category.ingredientes ul"
+    ) as HTMLElement;
+
+    console.log(displayPaoEl);
   };
 
-  const renderColections = () => {
-    onSnapshot(collection(database, "Paes"), (collection) => {
-      ingredientList = [];
+  onSnapshot(collection(database, "Paes"), (collection) => {
+    paoList = [];
 
-      collection.forEach((doc) => {
-        ingredientList.push(doc.data() as Ingredient);
-      });
-
-      renderOptions();
-      console.log(ingredientList);
+    collection.forEach((doc) => {
+      paoList.push(doc.data() as Ingredient);
     });
 
-    onSnapshot(collection(database, "Ingredientes"), (collection) => {
-      paoList = [];
+    renderOptions();
+    console.log(ingredientList);
+  });
 
-      collection.forEach((doc) => {
-        paoList.push(doc.data() as Ingredient);
-      });
+  onSnapshot(collection(database, "Ingredientes"), (collection) => {
+    ingredientList = [];
 
-      renderOptions();
+    collection.forEach((doc) => {
+      ingredientList.push(doc.data() as Ingredient);
     });
 
-    onSnapshot(collection(database, "Hamburguer"), (collection) => {
-      hamburguerList = [];
+    renderOptions();
+  });
 
-      collection.forEach((doc) => {
-        hamburguerList.push(doc.data() as Ingredient);
-      });
+  onSnapshot(collection(database, "Hamburguer"), (collection) => {
+    hamburguerList = [];
 
-      renderOptions();
+    collection.forEach((doc) => {
+      hamburguerList.push(doc.data() as Ingredient);
     });
-  };
+
+    renderOptions();
+  });
+  
+  // ----
+//   const innerHtml = `
+//       <label>
+//         <input type="radio" name="pao" checked />
+//         <span></span>
+//         <h3>ingredient_name</h3>
+//         <div>ingredient_price</div>
+//       </label>
+// `;
+
+//   const props = {
+//     ingredient_name: "name",
+//     ingredient_price: "price",
+//   };
+
+//   criaItens(allIngredientsList, displayPaoEl, "li", innerHtml, props);
+
+  // firebase acima --------
 
   const tiposIngredientesh3El = tiposIngredientesEl.querySelectorAll("h3");
   const tiposIngredientesPriceEl = tiposIngredientesEl.querySelectorAll("div");
@@ -192,7 +239,7 @@ if (page) {
     // limpa ingredientes
     selectedIngredients = [];
 
-    // ----------------------------------------------------------------- COLOCAR O FIREBASE AQUI -----------------------------------------------------------------
+    // ----------------------------------------- COLOCAR O FIREBASE AQUI ----------------------------------------------------
     ingredientEls.forEach((ingredient) => {
       if (ingredient.querySelector("input:checked")) {
         const ingredientName = ingredient.querySelector("h3")
@@ -223,7 +270,7 @@ if (page) {
   };
 
   // Atualiza Hamburguer
-  // ----------------------------------------------------------------- COLOCAR O FIREBASE AQUI -----------------------------------------------------------------
+  // -------------------------------------- COLOCAR O FIREBASE AQUI ----------------------------------------------------------
   const atualizaHamburguer = () => {
     currentHamburguer = {
       description: "Novo Hamburguer",
@@ -402,14 +449,15 @@ if (page) {
 
     renderOptions();
     // atualiza as opções de ingredientes
+    
 
-    renderColections();
-    // faz um 'OnSnapShot' nas coleções
+    // ----------------------------------------------- COLOCAR O FIREBASE AQUI --------------------------------------------------------
+    ingredientEls = page.querySelectorAll(".category label");
 
-    // ----------------------------------------------------------------- COLOCAR O FIREBASE AQUI -----------------------------------------------------------------
     ingredientEls.forEach((ingredientEl) => {
       ingredientEl.addEventListener("change", () => {
         onHamburgerChange();
+        console.log("change ok");
       });
     });
 
@@ -419,6 +467,5 @@ if (page) {
         adicionaHamburguer();
       });
   };
-
   render();
 }
