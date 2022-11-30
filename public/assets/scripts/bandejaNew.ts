@@ -1,6 +1,8 @@
 import { Hamburguer } from "./types/Hamburguer";
 import { Ingredient } from "./types/Ingredient";
 import { formatCurrency } from "./function/formatCurrency"
+import { collection, getFirestore, onSnapshot } from "firebase/firestore";
+import { criaItens } from "./function/criaItem";
 
 
 const page = document.querySelector("body[data-display='bandeja']")
@@ -15,7 +17,7 @@ let currentHamburguer = {} as Hamburguer
 let currentHamburguers = [] as Hamburguer[]
 
 
-const ingredientEls = page.querySelectorAll(".category label")
+let ingredientEls = page.querySelectorAll(".category label")
 let selectedIngredients = [] as Ingredient[]
 
 let pricesArray = [] as number[]
@@ -24,62 +26,110 @@ let pricesArray = [] as number[]
 
 // -------------------------------------------------------------------------------
 
-    // Mock de listagem de ingredientes (deve ser puxado do firebase)
+    // firebase / puxando listagem de ingredientes:
 
-    const opcoesEl = page.querySelectorAll(".category")
-    const tiposPaesEl = opcoesEl[0] as HTMLElement
-    const tiposIngredientesEl = opcoesEl[1] as HTMLElement
-
+    const database = getFirestore();
     const tiposPaes: Ingredient[] = []
-    const tiposIngredientes: Ingredient[] = []
+    const tiposHamburgueres: Ingredient[] = []
+    const tiposExtras: Ingredient[] = []
 
-    // tiposPaes
-    const tiposPaesh3El = tiposPaesEl.querySelectorAll("h3")
-    const tiposPaesPriceEl = tiposPaesEl.querySelectorAll("div")
-    for(let i = 0; i < tiposPaesh3El.length; i++) {
-        
-        let item: Ingredient = {
-            name: "",
-            price: 0
-        }
-        item.name = tiposPaesh3El[i].innerText
-        item.price = parseFloat(tiposPaesPriceEl[i].innerText.split(" ")[1].replace(",", "."))
+    onSnapshot(collection(database, "Paes"), (collection) => {
+        collection.forEach( doc => {
+            // configurar um novo item "type" em cada documento da collection,
+            // para substituir o código abaixo
+            const tipoPao = doc.data() as Ingredient
+            tipoPao.type = "pao"
+            tiposPaes.push(tipoPao)
 
-        tiposPaes.push(item)
+            // Após criar o item nos documentos na firestore apagar o código acima e deixar assim:
+            // tiposPaes.push(doc.data() as Ingredient)
 
+        })
+        renderIngredientes()
+    })      
+    onSnapshot(collection(database, "Hamburguer"), (collection) => {
+        collection.forEach( doc => {
+            // configurar um novo item "type" em cada documento da collection,
+            // para substituir o código abaixo
+            const tipoHamburguer = doc.data() as Ingredient
+            tipoHamburguer.type = "hamburguer"
+            tiposHamburgueres.push(tipoHamburguer)
+
+            // Após criar o item nos documentos na firestore apagar o código acima e deixar assim:
+            // tiposHamburgueres.push(doc.data() as Ingredient)
+        })
+        renderIngredientes()
+    })
+    onSnapshot(collection(database, "Ingredientes"), (collection) => {
+        collection.forEach( doc => {
+            // configurar um novo item "type" em cada documento da collection,
+            // para substituir o código abaixo
+            const tipoExtra = doc.data() as Ingredient
+            tipoExtra.type = "extra"
+            tiposExtras.push(tipoExtra)
+
+            // Após criar o item nos documentos na firestore apagar o código acima e deixar assim:
+            // tiposExtras.push(doc.data() as Ingredient)
+        })
+        renderIngredientes()
+    })
+
+    // render ingredientes config:
+    const ingredientesCheckboxInnerHTML = ` <label>
+                                        <input type="checkbox" name="extra" />
+                                        <span></span>
+                                        <h3>ingredient_name</h3>
+                                        <div>ingredient_price</div>
+                                    </label>`
+
+    const ingredientesRadioInnerHTML = ` <label>
+                                        <input type="radio" name="ingredient_type" />
+                                        <span></span>
+                                        <h3>ingredient_name</h3>
+                                        <div>ingredient_price</div>
+                                    </label>`
+    
+    const ingredientesProps = {
+        ingredient_name: "name",
+        ingredient_price: "price",
+        ingredient_type: "type"
     }
 
-    const tiposIngredientesh3El = tiposIngredientesEl.querySelectorAll("h3")
-    const tiposIngredientesPriceEl = tiposIngredientesEl.querySelectorAll("div")
-    for(let i = 0; i < tiposIngredientesh3El.length; i++) {
-        
-        let item: Ingredient = {
-            name: "",
-            price: 0
-        }
-        item.name = tiposIngredientesh3El[i].innerText
-        item.price = Number(tiposIngredientesPriceEl[i].innerText.split(" ")[1].replace(",", "."))
+    const tiposPaesEl = page.querySelector(".category.pao ul") as HTMLElement
+    const tiposHamburgueresEl = page.querySelector(".category.hamburguer ul") as HTMLElement
+    const tiposExtrasEl = page.querySelector(".category.ingredientes ul") as HTMLElement
 
-        tiposIngredientes.push(item)
+    // render Ingredientes:
+    const renderIngredientes = () => {
+        criaItens(tiposPaes, tiposPaesEl, "li", ingredientesRadioInnerHTML, ingredientesProps)
+        criaItens(tiposHamburgueres, tiposHamburgueresEl, "li", ingredientesRadioInnerHTML, ingredientesProps)
+        criaItens(tiposExtras, tiposExtrasEl, "li", ingredientesCheckboxInnerHTML, ingredientesProps)
+
+        ingredientEls = page.querySelectorAll(".category label")
+        ingredientEls.forEach( ingredientEl => {
+            ingredientEl.addEventListener("change", () => {
+                console.log("oi")
+                onHamburgerChange()
+            })
+        })
 
     }
-
 
 
 // ----------------------------------------------------------------------------
 
-const limpaBandeja = () => {
-    bandejaEl.innerHTML = ""
-}
+    const limpaBandeja = () => {
+        bandejaEl.innerHTML = ""
+    }
 
 
 
 
 // adicionar hamburguer
 
-        // Atualizar Ingredientes selecionados
-const atualizaIngredientes = () => {
-    // criar consts de Ingredientes selecionados, ids dos ingredientes selecionados
+    // Atualizar Ingredientes selecionados
+    const atualizaIngredientes = () => {
+    // criar consts de Ingredientes selecionados
     
     pricesArray = []
 
@@ -92,7 +142,8 @@ const atualizaIngredientes = () => {
 
             const ingredientName = ingredient.querySelector("h3")?.innerHTML as string
             const priceString = ingredient.querySelector("div")?.innerHTML as string
-            const ingredientPrice = parseFloat(priceString.split(" ")[1].replace(",", "."))
+            console.log("priceString: ", priceString)
+            const ingredientPrice = parseFloat(priceString.split("&nbsp;")[1].replace(",", "."))
             
 
             if(ingredientName != null && !isNaN(ingredientPrice)) {
@@ -107,7 +158,7 @@ const atualizaIngredientes = () => {
 
 
             } else {
-                console.log("Erro: esse iongrediente não possuía descrição ou preço válido ")
+                console.log("Erro: esse ingrediente não possuía descrição ou preço válido")
             }
 
 
@@ -258,6 +309,7 @@ const atualizaBandeja = () => {
             break;
     }
 
+    console.log("atualizou bandeja")
 
     atualizaPrecoTotalEl()
 
@@ -285,6 +337,7 @@ const atualizaPrecoTotalEl = () => {
         let precoHamburguers = 0
         currentHamburguers.forEach( hamburguer => {
             precoHamburguers += hamburguer.price
+            console.log("atualizou preco total")
         })
     
         precoTotalEl.innerHTML = `<small>Subtotal</small>${formatCurrency(precoHamburguers)}`
@@ -340,11 +393,7 @@ const render = () => {
 
 
 
-    ingredientEls.forEach( ingredientEl => {
-        ingredientEl.addEventListener("change", () => {
-            onHamburgerChange()
-        })
-    })
+
 
     page.querySelector(`button[aria-label="Salvar Hamburguer"]`)?.addEventListener("click", () => {
         adicionaHamburguer()

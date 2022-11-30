@@ -1,7 +1,7 @@
 const path = require("path")
 
 module.exports = {
-    entry: "./src/assets/scripts/index.ts",
+    entry: "./public/assets/scripts/index.ts",
     resolve: {
         extensions: [".ts", ".js"]
     },
@@ -18,7 +18,7 @@ module.exports = {
     },
     devServer: {
         static: {
-            directory: path.join(__dirname, "/src")
+            directory: path.join(__dirname, "public")
         },
         port: 3000
     }
