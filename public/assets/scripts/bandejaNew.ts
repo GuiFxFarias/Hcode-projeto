@@ -3,6 +3,7 @@ import { Ingredient } from "./types/Ingredient";
 import { formatCurrency } from "./function/formatCurrency"
 import { collection, getFirestore, onSnapshot } from "firebase/firestore";
 import { criaItens } from "./function/criaItem";
+import { stringToJson } from "./function/strigToJson";
 
 
 const page = document.querySelector("body[data-display='bandeja']")
@@ -397,6 +398,7 @@ const render = () => {
     atualizaBandeja()
     // atualiza título e prço total da bandeja
 
+    stringToJson()
 
 
 
