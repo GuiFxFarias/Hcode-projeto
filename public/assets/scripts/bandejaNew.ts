@@ -29,11 +29,13 @@ let pricesArray = [] as number[]
     // firebase / puxando listagem de ingredientes:
 
     const database = getFirestore();
-    const tiposPaes: Ingredient[] = []
-    const tiposHamburgueres: Ingredient[] = []
-    const tiposExtras: Ingredient[] = []
+    let tiposPaes: Ingredient[] = []
+    let tiposHamburgueres: Ingredient[] = []
+    let tiposExtras: Ingredient[] = []
 
     onSnapshot(collection(database, "Paes"), (collection) => {
+        tiposPaes = []
+ 
         collection.forEach( doc => {
             // configurar um novo item "type" em cada documento da collection,
             // para substituir o código abaixo
@@ -48,6 +50,8 @@ let pricesArray = [] as number[]
         renderIngredientes()
     })      
     onSnapshot(collection(database, "Hamburguer"), (collection) => {
+        tiposHamburgueres = []
+        
         collection.forEach( doc => {
             // configurar um novo item "type" em cada documento da collection,
             // para substituir o código abaixo
@@ -61,6 +65,8 @@ let pricesArray = [] as number[]
         renderIngredientes()
     })
     onSnapshot(collection(database, "Ingredientes"), (collection) => {
+        tiposExtras = []
+
         collection.forEach( doc => {
             // configurar um novo item "type" em cada documento da collection,
             // para substituir o código abaixo
