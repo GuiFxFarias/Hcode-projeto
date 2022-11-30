@@ -1,3 +1,3 @@
 import "./firebase.ts"
-import "./bandejaNew.ts"
+import "./bandeja.ts"
 import "./pay.ts"
