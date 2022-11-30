@@ -27,7 +27,7 @@ export  function criaItens  (entityList: AnyObject[], entityDisplayEl: HTMLEleme
                     // console.log(eval("props[prop]"))
                     // console.log(eval(entity.${eval("props[prop]")}))
 
-                    editedInnerHTML = editedInnerHTML.replace(prop, entity[`${eval("props[prop]")}`])
+                    editedInnerHTML = editedInnerHTML.replaceAll(prop, entity[`${eval("props[prop]")}`])
                 }
                 // console.log(editedInnerHTML)
 
