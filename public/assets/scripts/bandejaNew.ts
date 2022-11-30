@@ -351,6 +351,19 @@ const atualizaPrecoTotalEl = () => {
     
 }
 
+// criando o click do pagar
+
+const priceHambuguer = page.querySelector('[name="price_hambuguer"]') as HTMLInputElement
+const payButton = page.querySelector('[aria-label="Pagar"]') as HTMLButtonElement
+
+precoTotalEl?.addEventListener('load', (e) =>{
+    
+
+    priceHambuguer.value = 'balbalbal'
+})
+
+
+
 const atualizaHamburguerEPreco = () => {
     atualizaPrecoHamburguer()
     atualizaHamburguer()
@@ -398,7 +411,6 @@ const render = () => {
     atualizaBandeja()
     // atualiza título e prço total da bandeja
 
-    stringToJson()
 
 
 
