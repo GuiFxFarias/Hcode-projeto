@@ -316,7 +316,7 @@ if (page) {
   let precoHamburguers = 0;
 
   const atualizaPrecoTotalEl = () => {
-    precoHamburguers = 0
+    precoHamburguers = 0;
     currentHamburguers.forEach((hamburguer) => {
       precoHamburguers += hamburguer.price;
       // console.log("atualizou preco total")
@@ -327,12 +327,7 @@ if (page) {
     )}`;
   };
 
-
   // criando o click do pagar
-
-
- 
-
 
   const atualizaHamburguerEPreco = () => {
     atualizaPrecoHamburguer();
@@ -373,16 +368,16 @@ if (page) {
     atualizaBandeja();
     // atualiza título e prço total da bandeja
 
+    let orderHamburgueres;
     page
       .querySelector(`button[aria-label="Salvar Hamburguer"]`)
       ?.addEventListener("click", () => {
         adicionaHamburguer();
-
-        const priceHambuguer = page.querySelector(
-            '[name="price_hambuguer"]'
-          ) as HTMLInputElement;
         
-          priceHambuguer.value = '200 reais'
+        // localStorage.clear()
+        
+        orderHamburgueres = [...currentHamburguers]
+        localStorage.setItem("Hamburguer", JSON.stringify(orderHamburgueres));
       });
   };
 
