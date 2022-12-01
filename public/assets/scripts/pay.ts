@@ -78,4 +78,7 @@ if (page) {
     2 parcelas de R$ ${soma/2} (R$ ${soma/2})
     </option>`
   }
+  
+  
+
 }
