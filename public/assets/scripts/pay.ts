@@ -53,9 +53,13 @@ if (page) {
       if (item) {
         priceEl = getHamObje[c].price;
         c++;
+        // console.log(item)
       }
       priceAll.push(priceEl);
+      
     });
+    // console.log(getHamObje)
+    
 
 
     // Fazendo a soma usando o valor total dos ingredientes
