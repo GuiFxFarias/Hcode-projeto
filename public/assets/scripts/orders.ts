@@ -74,16 +74,14 @@ if (page) {
       i++;
     });
 
-     console.log(descriptionEl); // Console para verificar se adicionou os descriptions na array de descrição
+    console.log(descriptionEl); // Console para verificar se adicionou os descriptions na array de descrição
 
-    let sD = 0
-
-
+    let sD = 0;
 
     //Pensar numa lógica de adicionar cada 'li' de acordo com quantos elementoes existem dentro da array 'descriptionEl'
-    
-    if(descriptionEl){
-        ulList.innerHTML
+
+    if (descriptionEl) {
+      ulList.innerHTML;
     }
 
     ulList.innerHTML = `
@@ -107,7 +105,7 @@ if (page) {
             <select></select>
         </li>`;
 
-        console.log(sD)
+    console.log(sD);
 
     details?.addEventListener("click", (e) => {
       e.preventDefault();
