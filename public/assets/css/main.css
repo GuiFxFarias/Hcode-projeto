@@ -17,13 +17,13 @@ $secondary: rgba(#1B9AF6, .7); */
   --space: 20px;
   --bar-height: 64px;
   --field-height: 48px;
-  --primary: #DD0E0E;
-  --primaryText: #FFFFFF;
+  --primary: #dd0e0e;
+  --primaryText: #ffffff;
   --secondary: rgba(255, 82, 82, 0.7);
-  --dark: #070D0D;
-  --light: #D7D7D7;
-  --white: #FFFFFF;
-  --gray: #E3E3E3;
+  --dark: #070d0d;
+  --light: #d7d7d7;
+  --white: #ffffff;
+  --gray: #e3e3e3;
   --white10: rgba(255, 255, 255, 0.1);
   --white25: rgba(255, 255, 255, 0.25);
   --white90: rgba(255, 255, 255, 0.9);
@@ -45,7 +45,15 @@ body {
   color: var(--white);
 }
 
-body, div, section, main, article, header, footer, form, label {
+body,
+div,
+section,
+main,
+article,
+header,
+footer,
+form,
+label {
   display: flex;
   flex-direction: column;
 }
@@ -92,7 +100,7 @@ body, div, section, main, article, header, footer, form, label {
 #auth #form-tabs {
   margin: 0;
   padding: 0;
-  background-color: #3A1C1C;
+  background-color: #3a1c1c;
   height: 80px;
   display: flex;
   align-items: flex-end;
@@ -238,7 +246,12 @@ body, div, section, main, article, header, footer, form, label {
   width: 100%;
   height: 100%;
   background-position: top center;
-  background-image: linear-gradient(180deg, rgba(7, 13, 13, 0.5) 50.52%, #070D0D 100%), url("../images/photo-red.jpg");
+  background-image: linear-gradient(
+      180deg,
+      rgba(7, 13, 13, 0.5) 50.52%,
+      #070d0d 100%
+    ),
+    url("../images/photo-red.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   filter: brightness(0.8);
@@ -289,7 +302,7 @@ body, div, section, main, article, header, footer, form, label {
   width: 10px;
 }
 #app > section main > section::-webkit-scrollbar-track {
-  background: #070D0D;
+  background: #070d0d;
 }
 #app > section main > section::-webkit-scrollbar-thumb {
   background: rgba(221, 14, 14, 0.25);
@@ -329,7 +342,8 @@ body, div, section, main, article, header, footer, form, label {
   cursor: pointer;
   transition: none;
 }
-#app > section main .category ul label h3, #app > section main .category ul label div {
+#app > section main .category ul label h3,
+#app > section main .category ul label div {
   padding: 10px 0;
   border-bottom: var(--secondary) 1px dotted;
 }
@@ -377,7 +391,7 @@ body, div, section, main, article, header, footer, form, label {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #1F2525;
+  background-color: #1f2525;
   height: 64px;
   display: flex;
   justify-content: center;
@@ -416,7 +430,8 @@ body, div, section, main, article, header, footer, form, label {
 #app > section.page form {
   padding: var(--space);
 }
-#app > section.page form input, #app > section.page form select {
+#app > section.page form input,
+#app > section.page form select {
   height: 50px;
   width: 100%;
   border: var(--light) 1px solid;
@@ -426,13 +441,20 @@ body, div, section, main, article, header, footer, form, label {
   padding: 0 var(--space);
   outline: none;
 }
-#app > section.page form input::placeholder, #app > section.page form select::placeholder {
+#app > section.page form input::placeholder,
+#app > section.page form select::placeholder {
   color: var(--light);
 }
-#app > section.page form input:focus, #app > section.page form select:focus {
+#app > section.page form input:focus,
+#app > section.page form select:focus {
   border-color: var(--primary);
 }
-#app > section.page form input + input, #app > section.page form input + select, #app > section.page form input + .fields, #app > section.page form select + input, #app > section.page form select + select, #app > section.page form select + .fields {
+#app > section.page form input + input,
+#app > section.page form input + select,
+#app > section.page form input + .fields,
+#app > section.page form select + input,
+#app > section.page form select + select,
+#app > section.page form select + .fields {
   margin-top: var(--space);
 }
 #app > section.page form .fields {
@@ -446,10 +468,12 @@ body, div, section, main, article, header, footer, form, label {
   margin-right: 0;
   margin-left: 10px;
 }
-#app > section.page form .fields + input, #app > section.page form .fields + select {
+#app > section.page form .fields + input,
+#app > section.page form .fields + select {
   margin-top: var(--space);
 }
-#app > section.page section, #app > section.page footer {
+#app > section.page section,
+#app > section.page footer {
   background-color: var(--white);
 }
 #app > section.page footer button {
@@ -474,7 +498,8 @@ body, div, section, main, article, header, footer, form, label {
   #app > section.page main > section {
     padding-bottom: 64px;
   }
-  #app > section.page main section, #app > section.page footer {
+  #app > section.page main section,
+  #app > section.page footer {
     max-width: 768px;
     width: 100%;
   }
@@ -581,7 +606,8 @@ body, div, section, main, article, header, footer, form, label {
   cursor: pointer;
   transition-duration: 0.05s;
 }
-#app aside footer .close svg, #app aside footer .close span {
+#app aside footer .close svg,
+#app aside footer .close span {
   display: none;
 }
 #app aside footer .close svg {
@@ -658,7 +684,8 @@ body, div, section, main, article, header, footer, form, label {
 #app aside.open {
   height: calc(100vh - 350px);
 }
-#app aside.open header, #app aside.open section {
+#app aside.open header,
+#app aside.open section {
   padding: var(--space);
   height: initial;
 }
@@ -685,7 +712,8 @@ body, div, section, main, article, header, footer, form, label {
   height: 24px;
   width: 24px;
 }
-#app aside.open footer .close svg, #app aside.open footer .close span {
+#app aside.open footer .close svg,
+#app aside.open footer .close span {
   display: flex;
 }
 @media (min-width: 768px) {
@@ -708,7 +736,8 @@ body, div, section, main, article, header, footer, form, label {
   #app aside header strong {
     font-size: 24px;
   }
-  #app aside header:hover, #app aside header:active {
+  #app aside header:hover,
+  #app aside header:active {
     background-color: var(--white);
     color: var(--dark);
   }
@@ -735,7 +764,7 @@ body, div, section, main, article, header, footer, form, label {
   width: 10px;
 }
 #list-orders::-webkit-scrollbar-track {
-  background: #070D0D;
+  background: #070d0d;
 }
 #list-orders::-webkit-scrollbar-thumb {
   background: rgba(221, 14, 14, 0.25);
@@ -778,12 +807,34 @@ body, div, section, main, article, header, footer, form, label {
   padding: 10px var(--space);
   text-align: center;
   text-transform: uppercase;
+
 }
+
+.lista{
+  display: none;
+} 
+
+.add{
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  overflow: auto;
+  height: 100%;
+}
+
+.remove{
+  display: none;
+}
+
+
+
 #list-orders > li .content ul {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
   list-style: none;
 }
+
 #list-orders > li .content ul li {
   display: flex;
   flex-direction: row;
@@ -791,6 +842,7 @@ body, div, section, main, article, header, footer, form, label {
   height: 70%;
   align-items: center;
 }
+
 #list-orders > li .actions {
   justify-content: center;
   border-left: var(--dark) 1px dashed;

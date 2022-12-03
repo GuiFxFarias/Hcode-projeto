@@ -9,8 +9,12 @@ if (page) {
   let todayDate = new Date();
   let today = format(todayDate, "dd/MM/yyyy");
   const getHamburguer = localStorage.getItem("Hamburguer");
-  const ticket = page.querySelector("#list-orders li");
-  const details = page.querySelector('[aria-label="Detalhes"]');
+  const ticket = page.querySelector("#list-orders li") as HTMLLIElement;
+  const details = page.querySelector(
+    '[aria-label="Detalhes"]'
+  ) as HTMLButtonElement;
+  const ulPay = page.querySelector(".detailsPay") as HTMLUListElement;
+  const ulList = page.querySelector(".lista") as HTMLUListElement;
 
   // Criação do código
 
@@ -31,6 +35,7 @@ if (page) {
       priceAll.push(priceEl);
     });
     // console.log(getHamObje)
+    getHamObje.pop();
 
     // Fazendo a soma usando o valor total dos ingredientes
     let soma = 0;
@@ -40,7 +45,6 @@ if (page) {
     });
 
     // Tirando o item a mais que existe dentro da listagem de itens
-    getHamObje.pop();
 
     detailsOrder.innerHTML = `
         <li>
@@ -60,10 +64,56 @@ if (page) {
             <span>123456789</span>
         </li>`;
 
+    // Colocar os detalhes do pedido abaixo, ou seja, o hamburguer com seus ingredientes
+
+    let descriptionEl = [] as string[];
+    let i = 0;
+
+    getHamObje.forEach((item: string) => {
+      descriptionEl.push(getHamObje[i].description);
+      i++;
+    });
+
+     console.log(descriptionEl); // Console para verificar se adicionou os descriptions na array de descrição
+
+    let sD = 0
+
+
+
+    //Pensar numa lógica de adicionar cada 'li' de acordo com quantos elementoes existem dentro da array 'descriptionEl'
+    
+    if(descriptionEl){
+        ulList.innerHTML
+    }
+
+    ulList.innerHTML = `
+        <li>
+            <span>${descriptionEl[sD]}</span>
+            ${sD++}
+            <select></select>
+        </li>
+        <li>
+            <span>${descriptionEl[sD]}</span>
+            ${sD++}
+            <select></select>
+        </li>
+        <li>
+            <span>${descriptionEl[sD]}</span>
+            ${sD++}
+            <select></select>
+        <li>
+            <span>${descriptionEl[sD]}</span>
+            ${sD++}
+            <select></select>
+        </li>`;
+
+        console.log(sD)
+
     details?.addEventListener("click", (e) => {
       e.preventDefault();
-      
-      // criar um Css para o botao de detalhes do pedido para que apareca os lanches e o que tem em cada lanche
+
+      ulPay.classList.toggle("remove");
+      ulList.classList.toggle("add");
     });
   }
 }
