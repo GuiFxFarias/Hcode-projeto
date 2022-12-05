@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { criaItens } from "./function/criaItem";
 
 const page = document.querySelector(".no-footer");
 
@@ -8,7 +9,7 @@ if (page) {
   const detailsOrder = page.querySelector(".content ul") as HTMLUListElement;
   let todayDate = new Date();
   let today = format(todayDate, "dd/MM/yyyy");
-  const getHamburguer = localStorage.getItem("Hamburguer");
+  const getHamburguer = localStorage.getItem("Hamburguer") as string;
   const ticket = page.querySelector("#list-orders li") as HTMLLIElement;
   const details = page.querySelector(
     '[aria-label="Detalhes"]'
@@ -17,9 +18,10 @@ if (page) {
   const ulList = page.querySelector(".lista") as HTMLUListElement;
 
   // Criação do código
+  const getHamObje = JSON.parse(getHamburguer);
 
   if (getHamburguer) {
-    const getHamObje = JSON.parse(getHamburguer);
+    
 
     let c = 0;
     let priceEl = 0;
@@ -35,7 +37,7 @@ if (page) {
       priceAll.push(priceEl);
     });
     // console.log(getHamObje)
-    getHamObje.pop();
+    
 
     // Fazendo a soma usando o valor total dos ingredientes
     let soma = 0;
@@ -69,12 +71,14 @@ if (page) {
     let descriptionEl = [] as string[];
     let i = 0;
 
+
+
     getHamObje.forEach((item: string) => {
       descriptionEl.push(getHamObje[i].description);
       i++;
     });
 
-    console.log(descriptionEl); // Console para verificar se adicionou os descriptions na array de descrição
+   // console.log(descriptionEl); // Console para verificar se adicionou os descriptions na array de descrição
 
     let sD = 0;
 
@@ -84,28 +88,32 @@ if (page) {
       ulList.innerHTML;
     }
 
-    ulList.innerHTML = `
-        <li>
-            <span>${descriptionEl[sD]}</span>
-            ${sD++}
-            <select></select>
-        </li>
-        <li>
-            <span>${descriptionEl[sD]}</span>
-            ${sD++}
-            <select></select>
-        </li>
-        <li>
-            <span>${descriptionEl[sD]}</span>
-            ${sD++}
-            <select></select>
-        <li>
-            <span>${descriptionEl[sD]}</span>
-            ${sD++}
-            <select></select>
-        </li>`;
+    // ulList.innerHTML = `
+    //     <li>
+    //         <span>${descriptionEl[sD]}</span>
+    //         ${sD++}
+    //         <select></select>
+    //     </li>
+    //     <li>
+    //         <span>${descriptionEl[sD]}</span>
+    //         ${sD++}
+    //         <select></select>
+    //     </li>
+    //     `;
 
-    console.log(sD);
+      
+        const liInnerHtml = `
+        <span>hamburguer_name</span>
+        <select>hamburguer_ing</select>`
+
+        const props = {
+          hamburguer_name: 'description',
+          hamburguer_ing: 'ingredients'
+        }
+
+      console.log(getHamObje)
+
+       criaItens(getHamObje, ulList, 'li', liInnerHtml, props)
 
     details?.addEventListener("click", (e) => {
       e.preventDefault();

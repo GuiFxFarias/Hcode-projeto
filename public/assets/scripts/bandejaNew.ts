@@ -377,6 +377,7 @@ if (page) {
         // localStorage.clear()
         
         orderHamburgueres = [...currentHamburguers]
+        orderHamburgueres.pop()
         localStorage.setItem("Hamburguer", JSON.stringify(orderHamburgueres));
       });
   };
