@@ -77,9 +77,8 @@ if (page) {
       i++;
     });
 
-    console.log(descriptionEl)
+    
 
-  
     const liInnerHtml = `
         <span>hamburguer_name</span>
         <select><option>hamburguer_ing</option></select>`;
