@@ -21,8 +21,6 @@ if (page) {
   const getHamObje = JSON.parse(getHamburguer);
 
   if (getHamburguer) {
-    
-
     let c = 0;
     let priceEl = 0;
     let priceAll = [] as number[];
@@ -37,13 +35,12 @@ if (page) {
       priceAll.push(priceEl);
     });
     // console.log(getHamObje)
-    
 
     // Fazendo a soma usando o valor total dos ingredientes
     let soma = 0;
     priceAll.forEach((item, index) => {
       soma += priceAll[index];
-      // console.log(soma);
+      // console.log(index);
     });
 
     // Tirando o item a mais que existe dentro da listagem de itens
@@ -71,49 +68,33 @@ if (page) {
     let descriptionEl = [] as string[];
     let i = 0;
 
+    //console.log(getHamObje)
 
-
-    getHamObje.forEach((item: string) => {
-      descriptionEl.push(getHamObje[i].description);
+    // Tirando os ingredientes dentro da lista de objetos
+    getHamObje.forEach((item: string, index: string) => {
+      descriptionEl.push(getHamObje[i].ingredients);
       i++;
     });
 
-   // console.log(descriptionEl); // Console para verificar se adicionou os descriptions na array de descrição
+    let ingredientsName = [] as string[];
+    let contaI = 0;
 
-    let sD = 0;
+    //console.log(descriptionEl)
 
-    //Pensar numa lógica de adicionar cada 'li' de acordo com quantos elementoes existem dentro da array 'descriptionEl'
+    descriptionEl.forEach((item: string, index: number) => {
+      console.log(item[index]);
+    });
 
-    if (descriptionEl) {
-      ulList.innerHTML;
-    }
-
-    // ulList.innerHTML = `
-    //     <li>
-    //         <span>${descriptionEl[sD]}</span>
-    //         ${sD++}
-    //         <select></select>
-    //     </li>
-    //     <li>
-    //         <span>${descriptionEl[sD]}</span>
-    //         ${sD++}
-    //         <select></select>
-    //     </li>
-    //     `;
-
-      
-        const liInnerHtml = `
+    const liInnerHtml = `
         <span>hamburguer_name</span>
-        <select>hamburguer_ing</select>`
+        <select><option>hamburguer_ing</option></select>`;
 
-        const props = {
-          hamburguer_name: 'description',
-          hamburguer_ing: 'ingredients'
-        }
+    const props = {
+      hamburguer_name: "description",
+      hamburguer_ing: "ingredients",
+    };
 
-      console.log(getHamObje)
-
-       criaItens(getHamObje, ulList, 'li', liInnerHtml, props)
+    criaItens(getHamObje, ulList, "li", liInnerHtml, props);
 
     details?.addEventListener("click", (e) => {
       e.preventDefault();
