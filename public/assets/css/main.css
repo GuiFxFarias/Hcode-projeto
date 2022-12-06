@@ -815,18 +815,18 @@ label {
 } 
 
 .add{
-  display: block;
+  display: inline-block;
   margin: 0px;
   padding: 0px;
   list-style: none;
   overflow: auto;
-
+  height: 70%;
 }
+
 
 .remove{
   display: none;
 }
-
 
 
 #list-orders > li .content ul {
@@ -842,6 +842,8 @@ label {
   height: 70%;
   align-items: center;
 }
+
+
 
 #list-orders > li .actions {
   justify-content: center;

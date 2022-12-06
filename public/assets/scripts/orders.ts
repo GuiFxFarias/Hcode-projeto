@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { criaItens } from "./function/criaItem";
+import { AnyObject } from "./types/anyObject";
 
 const page = document.querySelector(".no-footer");
 
@@ -65,7 +66,7 @@ if (page) {
 
     // Colocar os detalhes do pedido abaixo, ou seja, o hamburguer com seus ingredientes
 
-    let descriptionEl = [] as string[];
+    const descriptionEl = [] as string[];
     let i = 0;
 
     //console.log(getHamObje)
@@ -76,15 +77,9 @@ if (page) {
       i++;
     });
 
-    let ingredientsName = [] as string[];
-    let contaI = 0;
+    console.log(descriptionEl)
 
-    //console.log(descriptionEl)
-
-    descriptionEl.forEach((item: string, index: number) => {
-      console.log(item[index]);
-    });
-
+  
     const liInnerHtml = `
         <span>hamburguer_name</span>
         <select><option>hamburguer_ing</option></select>`;
