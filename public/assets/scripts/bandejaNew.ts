@@ -179,7 +179,7 @@ if (page) {
         }
       }
     });
-
+    console.log("selectedIngredients: ", selectedIngredients)
     atualizaHamburguerEPreco();
   };
 
@@ -211,7 +211,7 @@ if (page) {
         }</div>
 
         <div style="color: white">${formatCurrency(hamburguer.price)}</div>
-        <button type="button" aria-label="Remover Hamburguer 1">
+        <button type="button" aria-label="Remover Hamburguer">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
             </svg>
@@ -227,7 +227,7 @@ if (page) {
         li.innerHTML = `<div>${hamburguer.description}</div>
 
         <div>${formatCurrency(hamburguer.price)}</div>
-        <button type="button" aria-label="Remover Hamburguer 1">
+        <button type="button" aria-label="Remover Hamburguer">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
             </svg>
@@ -297,6 +297,18 @@ if (page) {
     // console.log("atualizou bandeja")
 
     atualizaPrecoTotalEl();
+
+    // Atualiza botões de excluir hamburguer:
+
+    const hambElList = page.querySelectorAll("aside section li") as NodeListOf<HTMLElement>
+    hambElList?.forEach( hambEl => {
+      const trashButton = hambEl.querySelector("button") as HTMLButtonElement
+      trashButton.addEventListener( "click", () => {
+        console.log("clicou!")
+        removerHamburguer(hambEl)
+      })
+
+    })
   };
 
   const limpaIngredientesSelecionados = () => {
@@ -325,6 +337,32 @@ if (page) {
       precoHamburguers
     )}`;
   };
+
+  // funcao remover hamburguer:
+  const removerHamburguer = (targetEl: HTMLElement) => {
+  const hambNameEl = targetEl.querySelector("div")
+  console.log("hambNameEl: ", hambNameEl)
+
+  const hamburguerClicado = currentHamburguers.find((hamburguer) => {
+    return hamburguer.description === hambNameEl?.innerText
+  })
+  console.log("elemento atual: ", hamburguerClicado)
+
+  if(hamburguerClicado?.description!="Novo Hamburguer") {
+    console.log("currentHamburguers: ", currentHamburguers)
+    currentHamburguers.forEach( (hamburguer, index) => {
+      if(hamburguerClicado?.description==hamburguer.description){
+        currentHamburguers.splice(index, 1)
+      }
+    })
+    console.log("currentHamburguers: ", currentHamburguers)
+  } else {
+    console.log("Novo Hamburguer Clicado!")
+    limpaIngredientesSelecionados()
+  }
+  onHamburgerChange()
+
+  }
 
   // criando o click do pagar
 
@@ -379,6 +417,7 @@ if (page) {
         orderHamburgueres.pop()
         localStorage.setItem("Hamburguer", JSON.stringify(orderHamburgueres));
       });
+    
   };
 
   render();
