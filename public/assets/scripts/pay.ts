@@ -33,4 +33,52 @@ if (page) {
   IMask(codCvv, {
     mask: "000",
   });
+
+  // Variaveis sem ser pela mascara
+
+  const getHamburguer = localStorage.getItem("Hamburguer");
+  const priceCard = page.querySelector('[name="installments"]') as HTMLSelectElement;
+
+  // Criação do código
+
+  if (getHamburguer) {
+    const getHamObje = JSON.parse(getHamburguer);
+
+    let c = 0;
+    let priceEl = 0;
+    let priceAll = [] as number [];
+
+    // Pegando cada valor da array de hamburguers
+    getHamObje.forEach((item: number) => {
+      if (item) {
+        priceEl = getHamObje[c].price;
+        c++;
+        // console.log(item)
+      }
+      priceAll.push(priceEl);
+      
+    });
+    // console.log(getHamObje)
+    
+
+
+    // Fazendo a soma usando o valor total dos ingredientes
+    let soma = 0;    
+    priceAll.forEach((item, index) => {
+      soma += priceAll[index];
+      console.log(soma)
+    });
+
+    priceCard.innerHTML = ''
+
+    priceCard.innerHTML = `<option value="1">
+    1 parcela de R$ ${soma} (R$ ${soma})
+    </option>
+    <option value="2">
+    2 parcelas de R$ ${soma/2} (R$ ${soma/2})
+    </option>`
+  }
+  
+  
+
 }
