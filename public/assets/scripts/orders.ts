@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { criaItens } from "./function/criaItem";
 import { AnyObject } from "./types/anyObject";
+import { Ingredient } from "./types/Ingredient";
 
 const page = document.querySelector(".no-footer");
 
@@ -77,18 +78,70 @@ if (page) {
       i++;
     });
 
+//////////////////////////////////////////////  AJUSTAR AQUI ///////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+  let getHambObjeEdited: any[] = []
+  Object.keys(getHamObje).forEach( key => {
+    getHambObjeEdited.push(getHamObje[key])
+  })
+
+  getHambObjeEdited.forEach( hamb => {
+    const selectEl = document.createElement("select")
+    const ingredientList = hamb.ingredients as Ingredient[]
+
+    ingredientList.forEach( ingredient => {
+
+    const optionEl = document.createElement("option")
+    optionEl.innerHTML = `${ingredient.name}`
+    selectEl.appendChild(optionEl)
+
+    })
+
+    console.log("selectEl: ",selectEl.innerHTML)
     
+    hamb.ingrdientsSelectEl = selectEl.innerHTML
+    
+  })
+  
+
+  console.log("getHambObjeEdited: ", getHambObjeEdited)
+
 
     const liInnerHtml = `
         <span>hamburguer_name</span>
-        <select><option>hamburguer_ing</option></select>`;
+        <select>hamburguer_ing</select>`;
 
     const props = {
       hamburguer_name: "description",
-      hamburguer_ing: "ingredients",
+      hamburguer_ing: "ingrdientsSelectEl",
     };
 
-    criaItens(getHamObje, ulList, "li", liInnerHtml, props);
+    criaItens(getHambObjeEdited, ulList, "li", liInnerHtml, props);
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+//////////////////////////////////////////////  AJUSTAR AQUI ///////////////////////////////////////
+
 
     details?.addEventListener("click", (e) => {
       e.preventDefault();

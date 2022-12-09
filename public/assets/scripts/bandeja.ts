@@ -130,7 +130,7 @@ if (page) {
     ingredientEls = page.querySelectorAll(".category label");
     ingredientEls.forEach((ingredientEl) => {
       ingredientEl.addEventListener("change", () => {
-        // console.log("oi")
+        console.log("oi");
         onHamburgerChange();
       });
     });
@@ -159,7 +159,7 @@ if (page) {
           ?.innerHTML as string;
         const priceString = ingredient.querySelector("div")
           ?.innerHTML as string;
-        // console.log("priceString: ", priceString)
+        console.log("priceString: ", priceString);
         const ingredientPrice = parseFloat(
           priceString.split("&nbsp;")[1].replace(",", ".")
         );
@@ -294,7 +294,7 @@ if (page) {
         break;
     }
 
-    // console.log("atualizou bandeja")
+    console.log("atualizou bandeja");
 
     atualizaPrecoTotalEl();
   };
@@ -312,21 +312,17 @@ if (page) {
     }, 0);
   };
 
-  let precoHamburguers = 0;
-
   const atualizaPrecoTotalEl = () => {
-    precoHamburguers = 0;
+    let precoHamburguers = 0;
     currentHamburguers.forEach((hamburguer) => {
       precoHamburguers += hamburguer.price;
-      // console.log("atualizou preco total")
+      console.log("atualizou preco total");
     });
 
     precoTotalEl.innerHTML = `<small>Subtotal</small>${formatCurrency(
       precoHamburguers
     )}`;
   };
-
-  // criando o click do pagar
 
   const atualizaHamburguerEPreco = () => {
     atualizaPrecoHamburguer();
@@ -367,17 +363,10 @@ if (page) {
     atualizaBandeja();
     // atualiza título e prço total da bandeja
 
-    let orderHamburgueres;
     page
       .querySelector(`button[aria-label="Salvar Hamburguer"]`)
       ?.addEventListener("click", () => {
         adicionaHamburguer();
-        
-        // localStorage.clear()
-        
-        orderHamburgueres = [...currentHamburguers]
-        orderHamburgueres.pop()
-        localStorage.setItem("Hamburguer", JSON.stringify(orderHamburgueres));
       });
   };
 
